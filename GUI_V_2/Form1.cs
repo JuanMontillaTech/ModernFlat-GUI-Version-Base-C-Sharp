@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using GUI_V_2.Inventario;
+using GUI_V_2.Contacto;
 
 namespace GUI_V_2
 {
@@ -87,6 +89,22 @@ namespace GUI_V_2
         private void Form1_Load(object sender, EventArgs e)
         {
             btnlogoInicio_Click(null,e);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AbrirFormEnPanel(new frmContacto(1));
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            AbrirFormEnPanel(new frmContacto(2));
         }
     }
 }

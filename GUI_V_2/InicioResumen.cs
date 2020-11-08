@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GUI_V_2.Models;
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +23,14 @@ namespace GUI_V_2
         {
             lblhora.Text = DateTime.Now.ToString("hh:mm:ss ");
             lblFecha.Text = DateTime.Now.ToLongDateString();
+            using (POSEntities pOSDataSet = new POSEntities())
+            {
+                lblCliente.Text = pOSDataSet.Contactoes.Where(x => x.Proveedor == false).ToList().Count().ToString();
+                lblProveedores.Text = pOSDataSet.Contactoes.Where(x => x.Proveedor == true).ToList().Count().ToString();
+
+            }
+
         }
+
     }
 }

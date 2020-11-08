@@ -53,6 +53,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contacto\frmContacto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Contacto\frmContacto.Designer.cs">
+      <DependentUpon>frmContacto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contacto\frmContactoCRED.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Contacto\frmContactoCRED.Designer.cs">
+      <DependentUpon>frmContactoCRED.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +107,9 @@
     <Compile Include="Models\Categoria.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Contacto.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Factura.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -125,10 +140,10 @@
     <Compile Include="Models\TipoFactura.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="POSDataSet.Designer.cs">
+    <Compile Include="POSDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>POSDataSet.xsd</DependentUpon>
+      <DependentUpon>POSDataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="Productos.cs">
       <SubType>Form</SubType>
@@ -138,6 +153,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Contacto\frmContacto.resx">
+      <DependentUpon>frmContacto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contacto\frmContactoCRED.resx">
+      <DependentUpon>frmContactoCRED.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -176,16 +197,16 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <None Include="POSDataSet.xsc">
-      <DependentUpon>POSDataSet.xsd</DependentUpon>
+    <None Include="POSDataSet1.xsc">
+      <DependentUpon>POSDataSet1.xsd</DependentUpon>
     </None>
-    <None Include="POSDataSet.xsd">
+    <None Include="POSDataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>POSDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>POSDataSet1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="POSDataSet.xss">
-      <DependentUpon>POSDataSet.xsd</DependentUpon>
+    <None Include="POSDataSet1.xss">
+      <DependentUpon>POSDataSet1.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

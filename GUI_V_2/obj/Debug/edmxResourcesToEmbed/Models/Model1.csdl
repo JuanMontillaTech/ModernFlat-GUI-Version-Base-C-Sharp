@@ -72,5 +72,23 @@
     <EntitySet Name="Productos" EntityType="Self.Producto" />
     <EntitySet Name="Reciboes" EntityType="Self.Recibo" />
     <EntitySet Name="TipoFacturas" EntityType="Self.TipoFactura" />
+    <EntitySet Name="Contactoes" EntityType="POSModel.Contacto" />
   </EntityContainer>
+  <EntityType Name="Contacto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+    <Property Name="Apellido" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+    <Property Name="Cedula" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+    <Property Name="RNC" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+    <Property Name="Direccion" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+    <Property Name="Telefonos" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+    <Property Name="Celular" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+    <Property Name="Empresa" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+    <Property Name="Proveedor" Type="Boolean" />
+  </EntityType>
 </Schema>

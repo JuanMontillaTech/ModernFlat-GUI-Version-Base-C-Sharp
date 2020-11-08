@@ -55,3 +55,5 @@ C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V
 C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\GUI_V_2.Inventario.frmCategoriaCRED.resources
 C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\GUI_V_2.Inventario.Almacen.frmAlamacen.resources
 C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\GUI_V_2.Inventario.Almacen.frmAlmacenCRED.resources
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\GUI_V_2.Contacto.frmContacto.resources
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\GUI_V_2.Contacto.frmContactoCRED.resources

@@ -14,6 +14,23 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Categoria" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Contacto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="550" />
+    <Property Name="Apellido" Type="nvarchar" MaxLength="550" />
+    <Property Name="Cedula" Type="nvarchar" MaxLength="550" />
+    <Property Name="RNC" Type="nvarchar" MaxLength="550" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="550" />
+    <Property Name="Telefonos" Type="nvarchar" MaxLength="550" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="550" />
+    <Property Name="Celular" Type="nvarchar" MaxLength="550" />
+    <Property Name="Email" Type="nvarchar" MaxLength="550" />
+    <Property Name="Empresa" Type="nvarchar" MaxLength="550" />
+    <Property Name="Proveedor" Type="bit" />
+  </EntityType>
   <EntityType Name="Factura">
     <Key>
       <PropertyRef Name="Id" />
@@ -67,6 +84,7 @@
   <EntityContainer Name="POSModelStoreContainer">
     <EntitySet Name="Almacen" EntityType="Self.Almacen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FacturaDetalle" EntityType="Self.FacturaDetalle" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
