@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="POSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Almacen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Almacen1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Categoria1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Factura">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCliente" Type="Int32" />
+    <Property Name="IdTipo" Type="Int32" />
+    <Property Name="Total_Facturado" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Total_Pagado" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Total_Descuento" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Fecha_Facturacion" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Fecha_Vencimiento" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="FacturaDetalle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="IdArticulo" Type="Int32" />
+    <Property Name="Decripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Cantida" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Producto1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Precio_Compra" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Precio_Venta" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Recibo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDCliente" Type="Int32" />
+    <Property Name="IDFactura" Type="Int32" />
+    <Property Name="Pagado" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="IdMetodoPago" Type="Int32" />
+  </EntityType>
+  <EntityType Name="TipoFactura">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="POSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Almacens" EntityType="Self.Almacen" />
+    <EntitySet Name="Categorias" EntityType="Self.Categoria" />
+    <EntitySet Name="Facturas" EntityType="Self.Factura" />
+    <EntitySet Name="FacturaDetalles" EntityType="Self.FacturaDetalle" />
+    <EntitySet Name="Productos" EntityType="Self.Producto" />
+    <EntitySet Name="Reciboes" EntityType="Self.Recibo" />
+    <EntitySet Name="TipoFacturas" EntityType="Self.TipoFactura" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="POSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Almacen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Almacen" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Categoria" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" />
+          <Property Name="IdTipo" Type="int" />
+          <Property Name="Total_Facturado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Pagado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Descuento" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fecha_Facturacion" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fecha_Vencimiento" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="FacturaDetalle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdArticulo" Type="int" />
+          <Property Name="Decripcion" Type="nvarchar(max)" />
+          <Property Name="Precio" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Cantida" Type="numeric" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Producto" Type="nvarchar" MaxLength="50" />
+          <Property Name="Precio_Compra" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Precio_Venta" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Recibo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCliente" Type="int" />
+          <Property Name="IDFactura" Type="int" />
+          <Property Name="Pagado" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="IdMetodoPago" Type="int" />
+        </EntityType>
+        <EntityType Name="TipoFactura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="POSModelStoreContainer">
+          <EntitySet Name="Almacen" EntityType="Self.Almacen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacturaDetalle" EntityType="Self.FacturaDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recibo" EntityType="Self.Recibo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoFactura" EntityType="Self.TipoFactura" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="POSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Almacen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Almacen1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Categoria1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="IdTipo" Type="Int32" />
+          <Property Name="Total_Facturado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Pagado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Descuento" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fecha_Facturacion" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fecha_Vencimiento" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="FacturaDetalle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdArticulo" Type="Int32" />
+          <Property Name="Decripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Cantida" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Producto1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Precio_Compra" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Precio_Venta" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Recibo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCliente" Type="Int32" />
+          <Property Name="IDFactura" Type="Int32" />
+          <Property Name="Pagado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="IdMetodoPago" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TipoFactura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="POSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Almacens" EntityType="Self.Almacen" />
+          <EntitySet Name="Categorias" EntityType="Self.Categoria" />
+          <EntitySet Name="Facturas" EntityType="Self.Factura" />
+          <EntitySet Name="FacturaDetalles" EntityType="Self.FacturaDetalle" />
+          <EntitySet Name="Productos" EntityType="Self.Producto" />
+          <EntitySet Name="Reciboes" EntityType="Self.Recibo" />
+          <EntitySet Name="TipoFacturas" EntityType="Self.TipoFactura" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="POSModelStoreContainer" CdmEntityContainer="POSEntities">
+          <EntitySetMapping Name="Almacens">
+            <EntityTypeMapping TypeName="POSModel.Almacen">
+              <MappingFragment StoreEntitySet="Almacen">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Almacen1" ColumnName="Almacen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="POSModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Categoria1" ColumnName="Categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="POSModel.Factura">
+              <MappingFragment StoreEntitySet="Factura">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+                <ScalarProperty Name="Total_Facturado" ColumnName="Total_Facturado" />
+                <ScalarProperty Name="Total_Pagado" ColumnName="Total_Pagado" />
+                <ScalarProperty Name="Total_Descuento" ColumnName="Total_Descuento" />
+                <ScalarProperty Name="Fecha_Facturacion" ColumnName="Fecha_Facturacion" />
+                <ScalarProperty Name="Fecha_Vencimiento" ColumnName="Fecha_Vencimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacturaDetalles">
+            <EntityTypeMapping TypeName="POSModel.FacturaDetalle">
+              <MappingFragment StoreEntitySet="FacturaDetalle">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+                <ScalarProperty Name="Decripcion" ColumnName="Decripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cantida" ColumnName="Cantida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="POSModel.Producto">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Producto1" ColumnName="Producto" />
+                <ScalarProperty Name="Precio_Compra" ColumnName="Precio_Compra" />
+                <ScalarProperty Name="Precio_Venta" ColumnName="Precio_Venta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reciboes">
+            <EntityTypeMapping TypeName="POSModel.Recibo">
+              <MappingFragment StoreEntitySet="Recibo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+                <ScalarProperty Name="IDFactura" ColumnName="IDFactura" />
+                <ScalarProperty Name="Pagado" ColumnName="Pagado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdMetodoPago" ColumnName="IdMetodoPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoFacturas">
+            <EntityTypeMapping TypeName="POSModel.TipoFactura">
+              <MappingFragment StoreEntitySet="TipoFactura">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="POSModelStoreContainer" CdmEntityContainer="POSEntities">
+    <EntitySetMapping Name="Almacens">
+      <EntityTypeMapping TypeName="POSModel.Almacen">
+        <MappingFragment StoreEntitySet="Almacen">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Almacen1" ColumnName="Almacen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categorias">
+      <EntityTypeMapping TypeName="POSModel.Categoria">
+        <MappingFragment StoreEntitySet="Categoria">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Categoria1" ColumnName="Categoria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facturas">
+      <EntityTypeMapping TypeName="POSModel.Factura">
+        <MappingFragment StoreEntitySet="Factura">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+          <ScalarProperty Name="Total_Facturado" ColumnName="Total_Facturado" />
+          <ScalarProperty Name="Total_Pagado" ColumnName="Total_Pagado" />
+          <ScalarProperty Name="Total_Descuento" ColumnName="Total_Descuento" />
+          <ScalarProperty Name="Fecha_Facturacion" ColumnName="Fecha_Facturacion" />
+          <ScalarProperty Name="Fecha_Vencimiento" ColumnName="Fecha_Vencimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FacturaDetalles">
+      <EntityTypeMapping TypeName="POSModel.FacturaDetalle">
+        <MappingFragment StoreEntitySet="FacturaDetalle">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+          <ScalarProperty Name="Decripcion" ColumnName="Decripcion" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Cantida" ColumnName="Cantida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Productos">
+      <EntityTypeMapping TypeName="POSModel.Producto">
+        <MappingFragment StoreEntitySet="Productos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Producto1" ColumnName="Producto" />
+          <ScalarProperty Name="Precio_Compra" ColumnName="Precio_Compra" />
+          <ScalarProperty Name="Precio_Venta" ColumnName="Precio_Venta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reciboes">
+      <EntityTypeMapping TypeName="POSModel.Recibo">
+        <MappingFragment StoreEntitySet="Recibo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+          <ScalarProperty Name="IDFactura" ColumnName="IDFactura" />
+          <ScalarProperty Name="Pagado" ColumnName="Pagado" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="IdMetodoPago" ColumnName="IdMetodoPago" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoFacturas">
+      <EntityTypeMapping TypeName="POSModel.TipoFactura">
+        <MappingFragment StoreEntitySet="TipoFactura">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
