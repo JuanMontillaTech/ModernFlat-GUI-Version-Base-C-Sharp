@@ -6,6 +6,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Almacen1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Productos" Relationship="POSModel.FK_Productos_Almacen" FromRole="Almacen" ToRole="Producto" />
   </EntityType>
   <EntityType Name="Categoria">
     <Key>
@@ -13,6 +14,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Categoria1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Productos" Relationship="POSModel.FK_Productos_Categoria" FromRole="Categoria" ToRole="Producto" />
   </EntityType>
   <EntityType Name="Factura">
     <Key>
@@ -45,6 +47,14 @@
     <Property Name="Producto1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Precio_Compra" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Precio_Venta" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IDAlmacen" Type="Int32" />
+    <Property Name="IDCategoria" Type="Int32" />
+    <Property Name="Stock" Type="Int32" />
+    <NavigationProperty Name="Almacen" Relationship="POSModel.FK_Productos_Almacen" FromRole="Producto" ToRole="Almacen" />
+    <NavigationProperty Name="Categoria" Relationship="POSModel.FK_Productos_Categoria" FromRole="Producto" ToRole="Categoria" />
+    <Property Name="CodigoBarra" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IDUnidad" Type="Int32" />
+    <NavigationProperty Name="UnidadMedida" Relationship="POSModel.FK_Productos_UnidadMedida" FromRole="Producto" ToRole="UnidadMedida" />
   </EntityType>
   <EntityType Name="Recibo">
     <Key>
@@ -73,6 +83,19 @@
     <EntitySet Name="Reciboes" EntityType="Self.Recibo" />
     <EntitySet Name="TipoFacturas" EntityType="Self.TipoFactura" />
     <EntitySet Name="Contactoes" EntityType="POSModel.Contacto" />
+    <AssociationSet Name="FK_Productos_Almacen" Association="POSModel.FK_Productos_Almacen">
+      <End Role="Almacen" EntitySet="Almacens" />
+      <End Role="Producto" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Productos_Categoria" Association="POSModel.FK_Productos_Categoria">
+      <End Role="Categoria" EntitySet="Categorias" />
+      <End Role="Producto" EntitySet="Productos" />
+    </AssociationSet>
+    <EntitySet Name="UnidadMedidas" EntityType="POSModel.UnidadMedida" />
+    <AssociationSet Name="FK_Productos_UnidadMedida" Association="POSModel.FK_Productos_UnidadMedida">
+      <End Role="UnidadMedida" EntitySet="UnidadMedidas" />
+      <End Role="Producto" EntitySet="Productos" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Contacto">
     <Key>
@@ -91,4 +114,48 @@
     <Property Name="Empresa" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
     <Property Name="Proveedor" Type="Boolean" />
   </EntityType>
+  <Association Name="FK_Productos_Almacen">
+    <End Type="POSModel.Almacen" Role="Almacen" Multiplicity="0..1" />
+    <End Type="POSModel.Producto" Role="Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Almacen">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IDAlmacen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Productos_Categoria">
+    <End Type="POSModel.Categoria" Role="Categoria" Multiplicity="0..1" />
+    <End Type="POSModel.Producto" Role="Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IDCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UnidadMedida">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Productos" Relationship="POSModel.FK_Productos_UnidadMedida" FromRole="UnidadMedida" ToRole="Producto" />
+  </EntityType>
+  <Association Name="FK_Productos_UnidadMedida">
+    <End Type="POSModel.UnidadMedida" Role="UnidadMedida" Multiplicity="0..1" />
+    <End Type="POSModel.Producto" Role="Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UnidadMedida">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IDUnidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

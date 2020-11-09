@@ -28,6 +28,8 @@ namespace GUI_V_2
                 lblCliente.Text = pOSDataSet.Contactoes.Where(x => x.Proveedor == false).ToList().Count().ToString();
                 lblProveedores.Text = pOSDataSet.Contactoes.Where(x => x.Proveedor == true).ToList().Count().ToString();
 
+                lblProducto.Text = pOSDataSet.Productos.ToList().Count().ToString();
+
             }
 
         }

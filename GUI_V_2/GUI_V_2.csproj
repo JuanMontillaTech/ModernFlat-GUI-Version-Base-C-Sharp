@@ -101,6 +101,18 @@
     <Compile Include="Inventario\frmCategoriaCRED.Designer.cs">
       <DependentUpon>frmCategoriaCRED.cs</DependentUpon>
     </Compile>
+    <Compile Include="Inventario\Productos\frmProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventario\Productos\frmProducto.Designer.cs">
+      <DependentUpon>frmProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inventario\Productos\frmProductoCRED.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventario\Productos\frmProductoCRED.Designer.cs">
+      <DependentUpon>frmProductoCRED.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Almacen.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -140,6 +152,9 @@
     <Compile Include="Models\TipoFactura.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UnidadMedida.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="POSDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -176,6 +191,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inventario\frmCategoriaCRED.resx">
       <DependentUpon>frmCategoriaCRED.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventario\Productos\frmProducto.resx">
+      <DependentUpon>frmProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventario\Productos\frmProductoCRED.resx">
+      <DependentUpon>frmProductoCRED.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Productos.resx">
       <DependentUpon>Productos.cs</DependentUpon>

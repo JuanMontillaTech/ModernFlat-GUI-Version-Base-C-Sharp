@@ -140,7 +140,7 @@
             this.button6.ForeColor = System.Drawing.Color.White;
             this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
             this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.Location = new System.Drawing.Point(0, 438);
+            this.button6.Location = new System.Drawing.Point(1, 337);
             this.button6.Margin = new System.Windows.Forms.Padding(4);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(333, 49);
@@ -157,7 +157,7 @@
             this.button5.ForeColor = System.Drawing.Color.White;
             this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(0, 382);
+            this.button5.Location = new System.Drawing.Point(0, 280);
             this.button5.Margin = new System.Windows.Forms.Padding(4);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(333, 49);
@@ -175,7 +175,7 @@
             this.button4.ForeColor = System.Drawing.Color.White;
             this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(0, 325);
+            this.button4.Location = new System.Drawing.Point(-4, 223);
             this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(333, 49);
@@ -193,7 +193,7 @@
             this.button3.ForeColor = System.Drawing.Color.White;
             this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(0, 268);
+            this.button3.Location = new System.Drawing.Point(-4, 166);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(333, 49);
@@ -211,7 +211,7 @@
             this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(0, 212);
+            this.button2.Location = new System.Drawing.Point(0, 109);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(333, 49);
@@ -221,6 +221,7 @@
             // 
             // btnprod
             // 
+            this.btnprod.BackColor = System.Drawing.Color.OliveDrab;
             this.btnprod.FlatAppearance.BorderSize = 0;
             this.btnprod.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.btnprod.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -228,13 +229,13 @@
             this.btnprod.ForeColor = System.Drawing.Color.White;
             this.btnprod.Image = ((System.Drawing.Image)(resources.GetObject("btnprod.Image")));
             this.btnprod.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnprod.Location = new System.Drawing.Point(0, 155);
+            this.btnprod.Location = new System.Drawing.Point(1, 394);
             this.btnprod.Margin = new System.Windows.Forms.Padding(4);
             this.btnprod.Name = "btnprod";
             this.btnprod.Size = new System.Drawing.Size(333, 49);
             this.btnprod.TabIndex = 1;
-            this.btnprod.Text = "Productos";
-            this.btnprod.UseVisualStyleBackColor = true;
+            this.btnprod.Text = "Mantenimiento";
+            this.btnprod.UseVisualStyleBackColor = false;
             this.btnprod.Click += new System.EventHandler(this.btnprod_Click);
             // 
             // btnlogoInicio

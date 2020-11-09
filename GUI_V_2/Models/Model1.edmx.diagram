@@ -13,6 +13,10 @@
         <EntityTypeShape EntityType="POSModel.Recibo" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="POSModel.TipoFactura" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="POSModel.Contacto" Width="1.5" PointX="3.375" PointY="6.75" />
+        <AssociationConnector Association="POSModel.FK_Productos_Almacen" />
+        <AssociationConnector Association="POSModel.FK_Productos_Categoria" />
+        <EntityTypeShape EntityType="POSModel.UnidadMedida" Width="1.5" PointX="5.375" PointY="7.25" />
+        <AssociationConnector Association="POSModel.FK_Productos_UnidadMedida" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

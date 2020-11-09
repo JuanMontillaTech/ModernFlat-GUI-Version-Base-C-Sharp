@@ -18,5 +18,14 @@ namespace GUI_V_2.Models
         public string Producto1 { get; set; }
         public Nullable<decimal> Precio_Compra { get; set; }
         public Nullable<decimal> Precio_Venta { get; set; }
+        public Nullable<int> IDAlmacen { get; set; }
+        public Nullable<int> IDCategoria { get; set; }
+        public Nullable<int> Stock { get; set; }
+        public string CodigoBarra { get; set; }
+        public Nullable<int> IDUnidad { get; set; }
+    
+        public virtual Almacen Almacen { get; set; }
+        public virtual Categoria Categoria { get; set; }
+        public virtual UnidadMedida UnidadMedida { get; set; }
     }
 }

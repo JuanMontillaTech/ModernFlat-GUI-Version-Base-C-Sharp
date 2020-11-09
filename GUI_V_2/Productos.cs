@@ -1,5 +1,6 @@
 ﻿using GUI_V_2.Inventario;
 using GUI_V_2.Inventario.Almacen;
+using GUI_V_2.Inventario.Productos;
 
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,11 @@ namespace GUI_V_2
         private void button1_Click(object sender, EventArgs e)
         {
             AbrirFormEnPanel(new frmAlamacen());
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AbrirFormEnPanel(new frmProducto());
         }
     }
 }

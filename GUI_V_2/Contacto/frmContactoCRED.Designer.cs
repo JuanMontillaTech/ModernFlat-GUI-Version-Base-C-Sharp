@@ -69,7 +69,7 @@
             // 
             idLabel.AutoSize = true;
             idLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            idLabel.Location = new System.Drawing.Point(35, 79);
+            idLabel.Location = new System.Drawing.Point(35, 34);
             idLabel.Name = "idLabel";
             idLabel.Size = new System.Drawing.Size(100, 29);
             idLabel.TabIndex = 1;
@@ -79,7 +79,7 @@
             // 
             nombreLabel.AutoSize = true;
             nombreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            nombreLabel.Location = new System.Drawing.Point(35, 129);
+            nombreLabel.Location = new System.Drawing.Point(35, 84);
             nombreLabel.Name = "nombreLabel";
             nombreLabel.Size = new System.Drawing.Size(110, 29);
             nombreLabel.TabIndex = 3;
@@ -89,7 +89,7 @@
             // 
             apellidoLabel.AutoSize = true;
             apellidoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            apellidoLabel.Location = new System.Drawing.Point(36, 173);
+            apellidoLabel.Location = new System.Drawing.Point(36, 128);
             apellidoLabel.Name = "apellidoLabel";
             apellidoLabel.Size = new System.Drawing.Size(111, 29);
             apellidoLabel.TabIndex = 5;
@@ -99,7 +99,7 @@
             // 
             cedulaLabel.AutoSize = true;
             cedulaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            cedulaLabel.Location = new System.Drawing.Point(35, 224);
+            cedulaLabel.Location = new System.Drawing.Point(35, 179);
             cedulaLabel.Name = "cedulaLabel";
             cedulaLabel.Size = new System.Drawing.Size(100, 29);
             cedulaLabel.TabIndex = 7;
@@ -109,7 +109,7 @@
             // 
             rNCLabel.AutoSize = true;
             rNCLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            rNCLabel.Location = new System.Drawing.Point(36, 272);
+            rNCLabel.Location = new System.Drawing.Point(36, 227);
             rNCLabel.Name = "rNCLabel";
             rNCLabel.Size = new System.Drawing.Size(74, 29);
             rNCLabel.TabIndex = 9;
@@ -119,7 +119,7 @@
             // 
             direccionLabel.AutoSize = true;
             direccionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            direccionLabel.Location = new System.Drawing.Point(36, 320);
+            direccionLabel.Location = new System.Drawing.Point(36, 275);
             direccionLabel.Name = "direccionLabel";
             direccionLabel.Size = new System.Drawing.Size(126, 29);
             direccionLabel.TabIndex = 11;
@@ -129,7 +129,7 @@
             // 
             telefonosLabel.AutoSize = true;
             telefonosLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            telefonosLabel.Location = new System.Drawing.Point(462, 95);
+            telefonosLabel.Location = new System.Drawing.Point(543, 50);
             telefonosLabel.Name = "telefonosLabel";
             telefonosLabel.Size = new System.Drawing.Size(131, 29);
             telefonosLabel.TabIndex = 13;
@@ -139,7 +139,7 @@
             // 
             faxLabel.AutoSize = true;
             faxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            faxLabel.Location = new System.Drawing.Point(462, 147);
+            faxLabel.Location = new System.Drawing.Point(543, 102);
             faxLabel.Name = "faxLabel";
             faxLabel.Size = new System.Drawing.Size(61, 29);
             faxLabel.TabIndex = 15;
@@ -149,7 +149,7 @@
             // 
             celularLabel.AutoSize = true;
             celularLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            celularLabel.Location = new System.Drawing.Point(462, 193);
+            celularLabel.Location = new System.Drawing.Point(543, 148);
             celularLabel.Name = "celularLabel";
             celularLabel.Size = new System.Drawing.Size(100, 29);
             celularLabel.TabIndex = 17;
@@ -159,7 +159,7 @@
             // 
             emailLabel.AutoSize = true;
             emailLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            emailLabel.Location = new System.Drawing.Point(462, 233);
+            emailLabel.Location = new System.Drawing.Point(543, 188);
             emailLabel.Name = "emailLabel";
             emailLabel.Size = new System.Drawing.Size(85, 29);
             emailLabel.TabIndex = 19;
@@ -169,7 +169,7 @@
             // 
             empresaLabel.AutoSize = true;
             empresaLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            empresaLabel.Location = new System.Drawing.Point(462, 276);
+            empresaLabel.Location = new System.Drawing.Point(543, 231);
             empresaLabel.Name = "empresaLabel";
             empresaLabel.Size = new System.Drawing.Size(122, 29);
             empresaLabel.TabIndex = 21;
@@ -178,91 +178,91 @@
             // idTextBox
             // 
             this.idTextBox.Enabled = false;
-            this.idTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.idTextBox.Location = new System.Drawing.Point(151, 76);
+            this.idTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.idTextBox.Location = new System.Drawing.Point(159, 31);
             this.idTextBox.Name = "idTextBox";
-            this.idTextBox.Size = new System.Drawing.Size(157, 36);
+            this.idTextBox.Size = new System.Drawing.Size(223, 34);
             this.idTextBox.TabIndex = 2;
             // 
             // nombreTextBox
             // 
-            this.nombreTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nombreTextBox.Location = new System.Drawing.Point(151, 122);
+            this.nombreTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nombreTextBox.Location = new System.Drawing.Point(159, 77);
             this.nombreTextBox.Name = "nombreTextBox";
-            this.nombreTextBox.Size = new System.Drawing.Size(279, 36);
+            this.nombreTextBox.Size = new System.Drawing.Size(376, 34);
             this.nombreTextBox.TabIndex = 4;
             // 
             // apellidoTextBox
             // 
-            this.apellidoTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.apellidoTextBox.Location = new System.Drawing.Point(151, 170);
+            this.apellidoTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apellidoTextBox.Location = new System.Drawing.Point(159, 125);
             this.apellidoTextBox.Name = "apellidoTextBox";
-            this.apellidoTextBox.Size = new System.Drawing.Size(279, 36);
+            this.apellidoTextBox.Size = new System.Drawing.Size(376, 34);
             this.apellidoTextBox.TabIndex = 6;
             // 
             // cedulaTextBox
             // 
-            this.cedulaTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cedulaTextBox.Location = new System.Drawing.Point(151, 217);
+            this.cedulaTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cedulaTextBox.Location = new System.Drawing.Point(159, 172);
             this.cedulaTextBox.Name = "cedulaTextBox";
-            this.cedulaTextBox.Size = new System.Drawing.Size(279, 36);
+            this.cedulaTextBox.Size = new System.Drawing.Size(376, 34);
             this.cedulaTextBox.TabIndex = 8;
             // 
             // rNCTextBox
             // 
-            this.rNCTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rNCTextBox.Location = new System.Drawing.Point(151, 269);
+            this.rNCTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rNCTextBox.Location = new System.Drawing.Point(159, 224);
             this.rNCTextBox.Name = "rNCTextBox";
-            this.rNCTextBox.Size = new System.Drawing.Size(279, 36);
+            this.rNCTextBox.Size = new System.Drawing.Size(376, 34);
             this.rNCTextBox.TabIndex = 10;
             // 
             // direccionTextBox
             // 
             this.direccionTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.direccionTextBox.Location = new System.Drawing.Point(40, 352);
+            this.direccionTextBox.Location = new System.Drawing.Point(40, 307);
             this.direccionTextBox.Multiline = true;
             this.direccionTextBox.Name = "direccionTextBox";
-            this.direccionTextBox.Size = new System.Drawing.Size(867, 221);
+            this.direccionTextBox.Size = new System.Drawing.Size(1020, 221);
             this.direccionTextBox.TabIndex = 12;
             // 
             // telefonosTextBox
             // 
-            this.telefonosTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.telefonosTextBox.Location = new System.Drawing.Point(619, 92);
+            this.telefonosTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.telefonosTextBox.Location = new System.Drawing.Point(700, 47);
             this.telefonosTextBox.Name = "telefonosTextBox";
-            this.telefonosTextBox.Size = new System.Drawing.Size(225, 36);
+            this.telefonosTextBox.Size = new System.Drawing.Size(281, 34);
             this.telefonosTextBox.TabIndex = 14;
             // 
             // faxTextBox
             // 
-            this.faxTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.faxTextBox.Location = new System.Drawing.Point(619, 140);
+            this.faxTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.faxTextBox.Location = new System.Drawing.Point(700, 95);
             this.faxTextBox.Name = "faxTextBox";
-            this.faxTextBox.Size = new System.Drawing.Size(225, 36);
+            this.faxTextBox.Size = new System.Drawing.Size(281, 34);
             this.faxTextBox.TabIndex = 16;
             // 
             // celularTextBox
             // 
-            this.celularTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.celularTextBox.Location = new System.Drawing.Point(619, 186);
+            this.celularTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.celularTextBox.Location = new System.Drawing.Point(700, 141);
             this.celularTextBox.Name = "celularTextBox";
-            this.celularTextBox.Size = new System.Drawing.Size(225, 36);
+            this.celularTextBox.Size = new System.Drawing.Size(281, 34);
             this.celularTextBox.TabIndex = 18;
             // 
             // emailTextBox
             // 
-            this.emailTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emailTextBox.Location = new System.Drawing.Point(619, 276);
+            this.emailTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emailTextBox.Location = new System.Drawing.Point(700, 231);
             this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(288, 36);
+            this.emailTextBox.Size = new System.Drawing.Size(360, 34);
             this.emailTextBox.TabIndex = 20;
             // 
             // empresaTextBox
             // 
-            this.empresaTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.empresaTextBox.Location = new System.Drawing.Point(619, 233);
+            this.empresaTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.empresaTextBox.Location = new System.Drawing.Point(700, 188);
             this.empresaTextBox.Name = "empresaTextBox";
-            this.empresaTextBox.Size = new System.Drawing.Size(288, 36);
+            this.empresaTextBox.Size = new System.Drawing.Size(360, 34);
             this.empresaTextBox.TabIndex = 22;
             // 
             // button1
@@ -275,7 +275,7 @@
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(667, 580);
+            this.button1.Location = new System.Drawing.Point(820, 535);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(240, 43);
@@ -289,7 +289,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(944, 639);
+            this.ClientSize = new System.Drawing.Size(1075, 593);
             this.Controls.Add(this.button1);
             this.Controls.Add(idLabel);
             this.Controls.Add(this.idTextBox);
