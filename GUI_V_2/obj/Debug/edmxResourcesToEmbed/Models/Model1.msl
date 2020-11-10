@@ -20,6 +20,7 @@
     <EntitySetMapping Name="Facturas">
       <EntityTypeMapping TypeName="POSModel.Factura">
         <MappingFragment StoreEntitySet="Factura">
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
           <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
@@ -34,6 +35,7 @@
     <EntitySetMapping Name="FacturaDetalles">
       <EntityTypeMapping TypeName="POSModel.FacturaDetalle">
         <MappingFragment StoreEntitySet="FacturaDetalle">
+          <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
           <ScalarProperty Name="Decripcion" ColumnName="Decripcion" />
@@ -69,14 +71,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TipoFacturas">
-      <EntityTypeMapping TypeName="POSModel.TipoFactura">
-        <MappingFragment StoreEntitySet="TipoFactura">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Contactoes">
       <EntityTypeMapping TypeName="POSModel.Contacto">
         <MappingFragment StoreEntitySet="Contacto">
@@ -99,6 +93,16 @@
       <EntityTypeMapping TypeName="POSModel.UnidadMedida">
         <MappingFragment StoreEntitySet="UnidadMedida">
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoFacturas">
+      <EntityTypeMapping TypeName="POSModel.TipoFactura">
+        <MappingFragment StoreEntitySet="TipoFacturas">
+          <ScalarProperty Name="Grupo" ColumnName="Grupo" />
+          <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using GUI_V_2.Inventario;
 using GUI_V_2.Contacto;
+using GUI_V_2.Facturacion;
 
 namespace GUI_V_2
 {
@@ -105,6 +106,11 @@ namespace GUI_V_2
         private void button4_Click(object sender, EventArgs e)
         {
             AbrirFormEnPanel(new frmContacto(2));
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AbrirFormEnPanel(new frmVenta());
         }
     }
 }

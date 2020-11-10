@@ -14,6 +14,12 @@ namespace GUI_V_2.Models
     
     public partial class Contacto
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Contacto()
+        {
+            this.Facturas = new HashSet<Factura>();
+        }
+    
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -26,5 +32,8 @@ namespace GUI_V_2.Models
         public string Email { get; set; }
         public string Empresa { get; set; }
         public Nullable<bool> Proveedor { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Factura> Facturas { get; set; }
     }
 }

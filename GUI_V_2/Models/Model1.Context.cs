@@ -31,8 +31,8 @@ namespace GUI_V_2.Models
         public virtual DbSet<FacturaDetalle> FacturaDetalles { get; set; }
         public virtual DbSet<Producto> Productos { get; set; }
         public virtual DbSet<Recibo> Reciboes { get; set; }
-        public virtual DbSet<TipoFactura> TipoFacturas { get; set; }
         public virtual DbSet<Contacto> Contactoes { get; set; }
         public virtual DbSet<UnidadMedida> UnidadMedidas { get; set; }
+        public virtual DbSet<TipoFactura> TipoFacturas { get; set; }
     }
 }

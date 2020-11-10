@@ -19,5 +19,8 @@ namespace GUI_V_2.Models
         public string Decripcion { get; set; }
         public Nullable<decimal> Precio { get; set; }
         public Nullable<decimal> Cantida { get; set; }
+        public Nullable<int> IdFactura { get; set; }
+    
+        public virtual Factura Factura { get; set; }
     }
 }

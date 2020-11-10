@@ -28,6 +28,10 @@
     <Property Name="Total_Descuento" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Fecha_Facturacion" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Fecha_Vencimiento" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Contacto" Relationship="POSModel.FK_Factura_Contacto" FromRole="Factura" ToRole="Contacto" />
+    <NavigationProperty Name="TipoFactura" Relationship="POSModel.FK_Factura_TipoFacturas" FromRole="Factura" ToRole="TipoFactura" />
+    <NavigationProperty Name="FacturaDetalles" Relationship="POSModel.FK_FacturaDetalle_Factura" FromRole="Factura" ToRole="FacturaDetalle" />
   </EntityType>
   <EntityType Name="FacturaDetalle">
     <Key>
@@ -38,6 +42,8 @@
     <Property Name="Decripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Cantida" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdFactura" Type="Int32" />
+    <NavigationProperty Name="Factura" Relationship="POSModel.FK_FacturaDetalle_Factura" FromRole="FacturaDetalle" ToRole="Factura" />
   </EntityType>
   <EntityType Name="Producto">
     <Key>
@@ -67,13 +73,6 @@
     <Property Name="Fecha" Type="DateTime" Precision="3" />
     <Property Name="IdMetodoPago" Type="Int32" />
   </EntityType>
-  <EntityType Name="TipoFactura">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityContainer Name="POSEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Almacens" EntityType="Self.Almacen" />
     <EntitySet Name="Categorias" EntityType="Self.Categoria" />
@@ -81,7 +80,6 @@
     <EntitySet Name="FacturaDetalles" EntityType="Self.FacturaDetalle" />
     <EntitySet Name="Productos" EntityType="Self.Producto" />
     <EntitySet Name="Reciboes" EntityType="Self.Recibo" />
-    <EntitySet Name="TipoFacturas" EntityType="Self.TipoFactura" />
     <EntitySet Name="Contactoes" EntityType="POSModel.Contacto" />
     <AssociationSet Name="FK_Productos_Almacen" Association="POSModel.FK_Productos_Almacen">
       <End Role="Almacen" EntitySet="Almacens" />
@@ -95,6 +93,19 @@
     <AssociationSet Name="FK_Productos_UnidadMedida" Association="POSModel.FK_Productos_UnidadMedida">
       <End Role="UnidadMedida" EntitySet="UnidadMedidas" />
       <End Role="Producto" EntitySet="Productos" />
+    </AssociationSet>
+    <EntitySet Name="TipoFacturas" EntityType="POSModel.TipoFactura" />
+    <AssociationSet Name="FK_Factura_Contacto" Association="POSModel.FK_Factura_Contacto">
+      <End Role="Contacto" EntitySet="Contactoes" />
+      <End Role="Factura" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Factura_TipoFacturas" Association="POSModel.FK_Factura_TipoFacturas">
+      <End Role="TipoFactura" EntitySet="TipoFacturas" />
+      <End Role="Factura" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FacturaDetalle_Factura" Association="POSModel.FK_FacturaDetalle_Factura">
+      <End Role="Factura" EntitySet="Facturas" />
+      <End Role="FacturaDetalle" EntitySet="FacturaDetalles" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Contacto">
@@ -113,6 +124,7 @@
     <Property Name="Email" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
     <Property Name="Empresa" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
     <Property Name="Proveedor" Type="Boolean" />
+    <NavigationProperty Name="Facturas" Relationship="POSModel.FK_Factura_Contacto" FromRole="Contacto" ToRole="Factura" />
   </EntityType>
   <Association Name="FK_Productos_Almacen">
     <End Type="POSModel.Almacen" Role="Almacen" Multiplicity="0..1" />
@@ -155,6 +167,52 @@
       </Principal>
       <Dependent Role="Producto">
         <PropertyRef Name="IDUnidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TipoFactura">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Secuencia" Type="Int32" />
+    <Property Name="Grupo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Facturas" Relationship="POSModel.FK_Factura_TipoFacturas" FromRole="TipoFactura" ToRole="Factura" />
+  </EntityType>
+  <Association Name="FK_Factura_Contacto">
+    <End Type="POSModel.Contacto" Role="Contacto" Multiplicity="0..1" />
+    <End Type="POSModel.Factura" Role="Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contacto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Factura_TipoFacturas">
+    <End Type="POSModel.TipoFactura" Role="TipoFactura" Multiplicity="0..1" />
+    <End Type="POSModel.Factura" Role="Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoFactura">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="IdTipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FacturaDetalle_Factura">
+    <End Type="POSModel.Factura" Role="Factura" Multiplicity="0..1" />
+    <End Type="POSModel.FacturaDetalle" Role="FacturaDetalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Factura">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FacturaDetalle">
+        <PropertyRef Name="IdFactura" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

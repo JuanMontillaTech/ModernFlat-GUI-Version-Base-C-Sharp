@@ -14,6 +14,12 @@ namespace GUI_V_2.Models
     
     public partial class Factura
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Factura()
+        {
+            this.FacturaDetalles = new HashSet<FacturaDetalle>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> IdCliente { get; set; }
         public Nullable<int> IdTipo { get; set; }
@@ -22,5 +28,11 @@ namespace GUI_V_2.Models
         public Nullable<decimal> Total_Descuento { get; set; }
         public Nullable<decimal> Fecha_Facturacion { get; set; }
         public Nullable<decimal> Fecha_Vencimiento { get; set; }
+        public string Tipo { get; set; }
+    
+        public virtual Contacto Contacto { get; set; }
+        public virtual TipoFactura TipoFactura { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FacturaDetalle> FacturaDetalles { get; set; }
     }
 }

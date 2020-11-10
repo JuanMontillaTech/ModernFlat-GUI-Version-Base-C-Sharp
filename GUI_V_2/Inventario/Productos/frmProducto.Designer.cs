@@ -40,10 +40,8 @@
             this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Unidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Almacen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precio_Compra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Precio_Venta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cbarra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
@@ -137,10 +135,8 @@
             this.Categoria,
             this.Unidad,
             this.Almacen,
-            this.Precio_Compra,
             this.Precio_Venta,
-            this.Stock,
-            this.cbarra});
+            this.Stock});
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvData.Location = new System.Drawing.Point(0, 0);
             this.dgvData.Name = "dgvData";
@@ -161,12 +157,12 @@
             // 
             // producto
             // 
+            this.producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.producto.DataPropertyName = "producto";
             this.producto.HeaderText = "Producto";
             this.producto.MinimumWidth = 6;
             this.producto.Name = "producto";
             this.producto.ReadOnly = true;
-            this.producto.Width = 125;
             // 
             // Categoria
             // 
@@ -195,15 +191,6 @@
             this.Almacen.ReadOnly = true;
             this.Almacen.Width = 125;
             // 
-            // Precio_Compra
-            // 
-            this.Precio_Compra.DataPropertyName = "pCompra";
-            this.Precio_Compra.HeaderText = "Precio de Compra";
-            this.Precio_Compra.MinimumWidth = 6;
-            this.Precio_Compra.Name = "Precio_Compra";
-            this.Precio_Compra.ReadOnly = true;
-            this.Precio_Compra.Width = 125;
-            // 
             // Precio_Venta
             // 
             this.Precio_Venta.DataPropertyName = "pVenta";
@@ -221,15 +208,6 @@
             this.Stock.Name = "Stock";
             this.Stock.ReadOnly = true;
             this.Stock.Width = 125;
-            // 
-            // cbarra
-            // 
-            this.cbarra.DataPropertyName = "cbarra";
-            this.cbarra.HeaderText = "C.Barra";
-            this.cbarra.MinimumWidth = 6;
-            this.cbarra.Name = "cbarra";
-            this.cbarra.ReadOnly = true;
-            this.cbarra.Width = 125;
             // 
             // frmProducto
             // 
@@ -260,9 +238,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Categoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn Unidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Almacen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Precio_Compra;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio_Venta;
         private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cbarra;
     }
 }

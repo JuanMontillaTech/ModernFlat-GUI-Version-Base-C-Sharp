@@ -65,6 +65,12 @@
     <Compile Include="Contacto\frmContactoCRED.Designer.cs">
       <DependentUpon>frmContactoCRED.cs</DependentUpon>
     </Compile>
+    <Compile Include="Facturacion\frmVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Facturacion\frmVenta.Designer.cs">
+      <DependentUpon>frmVenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,7 @@
     <Compile Include="Inventario\Productos\frmProductoCRED.Designer.cs">
       <DependentUpon>frmProductoCRED.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManagerNumeros.cs" />
     <Compile Include="Models\Almacen.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -173,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Contacto\frmContactoCRED.resx">
       <DependentUpon>frmContactoCRED.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Facturacion\frmVenta.resx">
+      <DependentUpon>frmVenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

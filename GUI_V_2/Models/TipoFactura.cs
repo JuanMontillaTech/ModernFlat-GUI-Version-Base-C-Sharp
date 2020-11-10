@@ -14,7 +14,18 @@ namespace GUI_V_2.Models
     
     public partial class TipoFactura
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TipoFactura()
+        {
+            this.Facturas = new HashSet<Factura>();
+        }
+    
         public int Id { get; set; }
-        public string Tipo { get; set; }
+        public string Codigo { get; set; }
+        public Nullable<int> Secuencia { get; set; }
+        public string Grupo { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Factura> Facturas { get; set; }
     }
 }
