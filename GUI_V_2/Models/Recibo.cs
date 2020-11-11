@@ -15,10 +15,12 @@ namespace GUI_V_2.Models
     public partial class Recibo
     {
         public int Id { get; set; }
-        public Nullable<int> IDCliente { get; set; }
         public Nullable<int> IDFactura { get; set; }
         public Nullable<decimal> Pagado { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
         public Nullable<int> IdMetodoPago { get; set; }
+    
+        public virtual Factura Factura { get; set; }
+        public virtual MetodoPago MetodoPago { get; set; }
     }
 }

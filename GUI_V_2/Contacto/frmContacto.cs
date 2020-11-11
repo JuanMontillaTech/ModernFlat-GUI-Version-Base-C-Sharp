@@ -21,6 +21,7 @@ namespace GUI_V_2.Contacto
             this.id = _id;
             StartFrm();
         }
+       
         public void StartFrm () {
 
             if (id == 1)
@@ -62,16 +63,18 @@ namespace GUI_V_2.Contacto
                 {
                     Proveedor = true;
                 }
+                var query = from p in pOSDataSet.Contactoes.Where(x => x.Proveedor == Proveedor).ToList()
+                            select new
+                            {
+                                id = p.Id,
+                                nombre = p.Nombre + " " +p.Apellido,
+                                cedula = p.Cedula
 
 
-                contactoDataGridView.DataSource = pOSDataSet.Contactoes.Where(x => x.Proveedor == Proveedor).ToList();
-          
-
-
-
-            }
-           
-
+                            };
+                var resul = query.ToList();
+                dgvcontacto.DataSource = resul;
+            } 
         }
         private void btnEditar_Click(object sender, EventArgs e)
         {
@@ -121,11 +124,11 @@ namespace GUI_V_2.Contacto
             }
         }
 
-        private int? GetIdRow()
+        public int? GetIdRow()
         {
             try
             {
-                return int.Parse(contactoDataGridView.Rows[contactoDataGridView.CurrentRow.Index].Cells[0].Value.ToString());
+                return int.Parse(dgvcontacto.Rows[dgvcontacto.CurrentRow.Index].Cells[0].Value.ToString());
             }
             catch (Exception)
             {
@@ -133,6 +136,35 @@ namespace GUI_V_2.Contacto
                 return null;
             }
 
+        }
+        public void GetGRV(string Filter)
+        {
+            using (POSEntities pOSDataSet = new POSEntities())
+            {
+                bool Proveedor = false;
+                if (id == 2)
+                {
+                    Proveedor = true;
+                }
+                var query = from p in pOSDataSet.Contactoes.Where(x => x.Proveedor == Proveedor).ToList()
+                            select new
+                            {
+                                id = p.Id,
+                                nombre = p.Nombre + " " + p.Apellido,
+                                cedula = p.Cedula
+
+
+                            };
+                var resul = query.Where(x=> x.nombre.ToLower().Contains(Filter.ToLower())).ToList();
+                dgvcontacto.DataSource = resul;
+
+             }
+        }
+
+        private void txtFiltroCliente_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            GetGRV(((TextBox)sender).Text);
         }
     }
 }

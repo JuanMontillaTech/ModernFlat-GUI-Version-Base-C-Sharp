@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProducto));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnExportar = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.txtFiltroCliente = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -43,20 +47,73 @@
             this.Precio_Venta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnExportar);
+            this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1117, 94);
+            this.panel1.Size = new System.Drawing.Size(1117, 108);
             this.panel1.TabIndex = 26;
+            // 
+            // btnExportar
+            // 
+            this.btnExportar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btnExportar.FlatAppearance.BorderSize = 0;
+            this.btnExportar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportar.ForeColor = System.Drawing.Color.White;
+            this.btnExportar.Image = ((System.Drawing.Image)(resources.GetObject("btnExportar.Image")));
+            this.btnExportar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExportar.Location = new System.Drawing.Point(797, 27);
+            this.btnExportar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(240, 43);
+            this.btnExportar.TabIndex = 27;
+            this.btnExportar.Text = "Exportar";
+            this.btnExportar.UseVisualStyleBackColor = false;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.txtFiltroCliente);
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 86);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1117, 22);
+            this.panel3.TabIndex = 26;
+            // 
+            // txtFiltroCliente
+            // 
+            this.txtFiltroCliente.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtFiltroCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFiltroCliente.Location = new System.Drawing.Point(67, 0);
+            this.txtFiltroCliente.Name = "txtFiltroCliente";
+            this.txtFiltroCliente.Size = new System.Drawing.Size(1050, 26);
+            this.txtFiltroCliente.TabIndex = 28;
+            this.txtFiltroCliente.TextChanged += new System.EventHandler(this.txtFiltroCliente_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 20);
+            this.label1.TabIndex = 29;
+            this.label1.Text = "Filtro";
             // 
             // button3
             // 
@@ -119,9 +176,9 @@
             // 
             this.panel2.Controls.Add(this.dgvData);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 94);
+            this.panel2.Location = new System.Drawing.Point(0, 108);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1117, 654);
+            this.panel2.Size = new System.Drawing.Size(1117, 640);
             this.panel2.TabIndex = 27;
             // 
             // dgvData
@@ -139,11 +196,13 @@
             this.Stock});
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvData.Location = new System.Drawing.Point(0, 0);
+            this.dgvData.MultiSelect = false;
             this.dgvData.Name = "dgvData";
             this.dgvData.ReadOnly = true;
             this.dgvData.RowHeadersWidth = 51;
             this.dgvData.RowTemplate.Height = 24;
-            this.dgvData.Size = new System.Drawing.Size(1117, 654);
+            this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvData.Size = new System.Drawing.Size(1117, 640);
             this.dgvData.TabIndex = 0;
             // 
             // Código
@@ -157,12 +216,13 @@
             // 
             // producto
             // 
-            this.producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.producto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.producto.DataPropertyName = "producto";
             this.producto.HeaderText = "Producto";
             this.producto.MinimumWidth = 6;
             this.producto.Name = "producto";
             this.producto.ReadOnly = true;
+            this.producto.Width = 314;
             // 
             // Categoria
             // 
@@ -219,6 +279,8 @@
             this.Name = "frmProducto";
             this.Text = "Productos";
             this.panel1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.ResumeLayout(false);
@@ -233,6 +295,9 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dgvData;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TextBox txtFiltroCliente;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Código;
         private System.Windows.Forms.DataGridViewTextBoxColumn producto;
         private System.Windows.Forms.DataGridViewTextBoxColumn Categoria;
@@ -240,5 +305,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Almacen;
         private System.Windows.Forms.DataGridViewTextBoxColumn Precio_Venta;
         private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
+        private System.Windows.Forms.Button btnExportar;
     }
 }

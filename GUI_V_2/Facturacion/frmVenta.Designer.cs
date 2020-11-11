@@ -41,20 +41,22 @@
             this.txtMoneda = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.pnlFoot = new System.Windows.Forms.Panel();
+            this.btnPrint = new System.Windows.Forms.Button();
+            this.txtTotal = new System.Windows.Forms.Label();
+            this.txtSubtotal = new System.Windows.Forms.Label();
             this.btnPagar = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtDecuento = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.pnlHead = new System.Windows.Forms.Panel();
+            this.btnClientes = new System.Windows.Forms.Button();
             this.pnlArticulo = new System.Windows.Forms.Panel();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.txtcbarra = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlGrv = new System.Windows.Forms.Panel();
             this.dgvData = new System.Windows.Forms.DataGridView();
-            this.txtSubtotal = new System.Windows.Forms.Label();
-            this.txtTotal = new System.Windows.Forms.Label();
             this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.U_de_M = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,6 +64,8 @@
             this.PrecioUnidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ptotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrecioCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.btnFacturar = new System.Windows.Forms.Button();
             this.pnlFoot.SuspendLayout();
             this.pnlHead.SuspendLayout();
             this.pnlArticulo.SuspendLayout();
@@ -123,7 +127,7 @@
             this.txtIDCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtIDCliente.Location = new System.Drawing.Point(168, 89);
             this.txtIDCliente.Name = "txtIDCliente";
-            this.txtIDCliente.Size = new System.Drawing.Size(261, 26);
+            this.txtIDCliente.Size = new System.Drawing.Size(207, 26);
             this.txtIDCliente.TabIndex = 10;
             this.txtIDCliente.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtIDCliente_KeyDown);
             this.txtIDCliente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIDCliente_KeyPress);
@@ -137,6 +141,7 @@
             this.txtNombreCliente.Name = "txtNombreCliente";
             this.txtNombreCliente.Size = new System.Drawing.Size(261, 26);
             this.txtNombreCliente.TabIndex = 12;
+            this.txtNombreCliente.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNombreCliente_KeyUp);
             // 
             // label6
             // 
@@ -187,6 +192,8 @@
             // 
             // pnlFoot
             // 
+            this.pnlFoot.Controls.Add(this.btnFacturar);
+            this.pnlFoot.Controls.Add(this.btnPrint);
             this.pnlFoot.Controls.Add(this.txtTotal);
             this.pnlFoot.Controls.Add(this.txtSubtotal);
             this.pnlFoot.Controls.Add(this.btnPagar);
@@ -195,18 +202,50 @@
             this.pnlFoot.Controls.Add(this.txtDecuento);
             this.pnlFoot.Controls.Add(this.label9);
             this.pnlFoot.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFoot.Location = new System.Drawing.Point(0, 709);
+            this.pnlFoot.Location = new System.Drawing.Point(0, 705);
             this.pnlFoot.Name = "pnlFoot";
-            this.pnlFoot.Size = new System.Drawing.Size(849, 179);
+            this.pnlFoot.Size = new System.Drawing.Size(849, 183);
             this.pnlFoot.TabIndex = 17;
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(300, 128);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(75, 23);
+            this.btnPrint.TabIndex = 25;
+            this.btnPrint.Text = "Imprimit";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // txtTotal
+            // 
+            this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTotal.AutoSize = true;
+            this.txtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTotal.Location = new System.Drawing.Point(564, 85);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.Size = new System.Drawing.Size(26, 29);
+            this.txtTotal.TabIndex = 24;
+            this.txtTotal.Text = "0";
+            // 
+            // txtSubtotal
+            // 
+            this.txtSubtotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSubtotal.AutoSize = true;
+            this.txtSubtotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSubtotal.Location = new System.Drawing.Point(564, 15);
+            this.txtSubtotal.Name = "txtSubtotal";
+            this.txtSubtotal.Size = new System.Drawing.Size(26, 29);
+            this.txtSubtotal.TabIndex = 23;
+            this.txtSubtotal.Text = "0";
             // 
             // btnPagar
             // 
-            this.btnPagar.Location = new System.Drawing.Point(569, 113);
+            this.btnPagar.Location = new System.Drawing.Point(244, 6);
             this.btnPagar.Name = "btnPagar";
-            this.btnPagar.Size = new System.Drawing.Size(118, 38);
+            this.btnPagar.Size = new System.Drawing.Size(185, 38);
             this.btnPagar.TabIndex = 20;
-            this.btnPagar.Text = "Pagar";
+            this.btnPagar.Text = "Facturar y Pagar";
             this.btnPagar.UseVisualStyleBackColor = true;
             // 
             // label10
@@ -214,7 +253,7 @@
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(479, 83);
+            this.label10.Location = new System.Drawing.Point(467, 92);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(46, 20);
             this.label10.TabIndex = 21;
@@ -225,7 +264,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(478, 18);
+            this.label2.Location = new System.Drawing.Point(467, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 20);
             this.label2.TabIndex = 18;
@@ -235,7 +274,7 @@
             // 
             this.txtDecuento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDecuento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDecuento.Location = new System.Drawing.Point(569, 48);
+            this.txtDecuento.Location = new System.Drawing.Point(569, 52);
             this.txtDecuento.Name = "txtDecuento";
             this.txtDecuento.Size = new System.Drawing.Size(261, 26);
             this.txtDecuento.TabIndex = 20;
@@ -246,7 +285,7 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(472, 53);
+            this.label9.Location = new System.Drawing.Point(467, 52);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(90, 20);
             this.label9.TabIndex = 19;
@@ -254,6 +293,7 @@
             // 
             // pnlHead
             // 
+            this.pnlHead.Controls.Add(this.btnClientes);
             this.pnlHead.Controls.Add(this.label3);
             this.pnlHead.Controls.Add(this.cbmTipo);
             this.pnlHead.Controls.Add(this.txtMoneda);
@@ -271,6 +311,16 @@
             this.pnlHead.Name = "pnlHead";
             this.pnlHead.Size = new System.Drawing.Size(849, 166);
             this.pnlHead.TabIndex = 0;
+            // 
+            // btnClientes
+            // 
+            this.btnClientes.Location = new System.Drawing.Point(381, 88);
+            this.btnClientes.Name = "btnClientes";
+            this.btnClientes.Size = new System.Drawing.Size(90, 28);
+            this.btnClientes.TabIndex = 20;
+            this.btnClientes.Text = "Clientes";
+            this.btnClientes.UseVisualStyleBackColor = true;
+            this.btnClientes.Click += new System.EventHandler(this.btnClientes_Click);
             // 
             // pnlArticulo
             // 
@@ -291,6 +341,7 @@
             this.btnBuscar.TabIndex = 19;
             this.btnBuscar.Text = "Articulos";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // txtcbarra
             // 
@@ -299,7 +350,9 @@
             this.txtcbarra.Name = "txtcbarra";
             this.txtcbarra.Size = new System.Drawing.Size(261, 26);
             this.txtcbarra.TabIndex = 18;
+            this.txtcbarra.Click += new System.EventHandler(this.txtcbarra_Click);
             this.txtcbarra.Enter += new System.EventHandler(this.txtcbarra_Enter);
+            this.txtcbarra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtcbarra_KeyPress);
             this.txtcbarra.Leave += new System.EventHandler(this.txtcbarra_Leave);
             // 
             // label1
@@ -318,7 +371,7 @@
             this.pnlGrv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlGrv.Location = new System.Drawing.Point(0, 213);
             this.pnlGrv.Name = "pnlGrv";
-            this.pnlGrv.Size = new System.Drawing.Size(849, 496);
+            this.pnlGrv.Size = new System.Drawing.Size(849, 492);
             this.pnlGrv.TabIndex = 19;
             // 
             // dgvData
@@ -342,32 +395,10 @@
             this.dgvData.RowHeadersWidth = 51;
             this.dgvData.RowTemplate.Height = 24;
             this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvData.Size = new System.Drawing.Size(849, 496);
+            this.dgvData.Size = new System.Drawing.Size(849, 492);
             this.dgvData.TabIndex = 0;
             this.dgvData.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellEndEdit);
             this.dgvData.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvData_CellValidating);
-            // 
-            // txtSubtotal
-            // 
-            this.txtSubtotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSubtotal.AutoSize = true;
-            this.txtSubtotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSubtotal.Location = new System.Drawing.Point(564, 11);
-            this.txtSubtotal.Name = "txtSubtotal";
-            this.txtSubtotal.Size = new System.Drawing.Size(26, 29);
-            this.txtSubtotal.TabIndex = 23;
-            this.txtSubtotal.Text = "0";
-            // 
-            // txtTotal
-            // 
-            this.txtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTotal.AutoSize = true;
-            this.txtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotal.Location = new System.Drawing.Point(564, 81);
-            this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Size = new System.Drawing.Size(26, 29);
-            this.txtTotal.TabIndex = 24;
-            this.txtTotal.Text = "0";
             // 
             // Codigo
             // 
@@ -430,6 +461,16 @@
             this.PrecioCompra.Visible = false;
             this.PrecioCompra.Width = 125;
             // 
+            // btnFacturar
+            // 
+            this.btnFacturar.Location = new System.Drawing.Point(7, 6);
+            this.btnFacturar.Name = "btnFacturar";
+            this.btnFacturar.Size = new System.Drawing.Size(231, 38);
+            this.btnFacturar.TabIndex = 26;
+            this.btnFacturar.Text = "Facturar (Cuenta por Cobrar)";
+            this.btnFacturar.UseVisualStyleBackColor = true;
+            this.btnFacturar.Click += new System.EventHandler(this.btnFacturar_Click);
+            // 
             // frmVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -490,5 +531,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioUnidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn ptotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioCompra;
+        private System.Windows.Forms.Button btnClientes;
+        private System.Windows.Forms.Button btnPrint;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.Button btnFacturar;
     }
 }

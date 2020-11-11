@@ -47,19 +47,27 @@
           <Property Name="Total_Facturado" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Total_Pagado" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Total_Descuento" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Fecha_Facturacion" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Fecha_Vencimiento" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Fecha_Facturacion" Type="datetime" />
+          <Property Name="Fecha_Vencimiento" Type="datetime" />
+          <Property Name="Estado" Type="int" />
         </EntityType>
         <EntityType Name="FacturaDetalle">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdFactura" Type="int" />
           <Property Name="IdArticulo" Type="int" />
           <Property Name="Decripcion" Type="nvarchar(max)" />
           <Property Name="Precio" Type="numeric" Precision="18" Scale="2" />
           <Property Name="Cantida" Type="numeric" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="MetodoPago">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MetodoPago" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Productos">
           <Key>
@@ -80,11 +88,20 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IDCliente" Type="int" />
           <Property Name="IDFactura" Type="int" />
           <Property Name="Pagado" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Fecha" Type="datetime" />
           <Property Name="IdMetodoPago" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TipoFacturas">
           <Key>
@@ -174,14 +191,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Recibo_Factura">
+          <End Role="Factura" Type="Self.Factura" Multiplicity="0..1" />
+          <End Role="Recibo" Type="Self.Recibo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factura">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recibo">
+              <PropertyRef Name="IDFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recibo_MetodoPago">
+          <End Role="MetodoPago" Type="Self.MetodoPago" Multiplicity="0..1" />
+          <End Role="Recibo" Type="Self.Recibo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MetodoPago">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recibo">
+              <PropertyRef Name="IdMetodoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="POSModelStoreContainer">
           <EntitySet Name="Almacen" EntityType="Self.Almacen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FacturaDetalle" EntityType="Self.FacturaDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MetodoPago" EntityType="Self.MetodoPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recibo" EntityType="Self.Recibo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoFacturas" EntityType="Self.TipoFacturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnidadMedida" EntityType="Self.UnidadMedida" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Factura_Contacto" Association="Self.FK_Factura_Contacto">
@@ -208,11 +251,64 @@
             <End Role="UnidadMedida" EntitySet="UnidadMedida" />
             <End Role="Productos" EntitySet="Productos" />
           </AssociationSet>
+          <AssociationSet Name="FK_Recibo_Factura" Association="Self.FK_Recibo_Factura">
+            <End Role="Factura" EntitySet="Factura" />
+            <End Role="Recibo" EntitySet="Recibo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recibo_MetodoPago" Association="Self.FK_Recibo_MetodoPago">
+            <End Role="MetodoPago" EntitySet="MetodoPago" />
+            <End Role="Recibo" EntitySet="Recibo" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="POSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="POSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Almacens" EntityType="POSModel.Almacen" />
+          <EntitySet Name="Categorias" EntityType="POSModel.Categoria" />
+          <EntitySet Name="Contactoes" EntityType="POSModel.Contacto" />
+          <EntitySet Name="Facturas" EntityType="POSModel.Factura" />
+          <EntitySet Name="FacturaDetalles" EntityType="POSModel.FacturaDetalle" />
+          <EntitySet Name="MetodoPagoes" EntityType="POSModel.MetodoPago" />
+          <EntitySet Name="Productos" EntityType="POSModel.Producto" />
+          <EntitySet Name="Reciboes" EntityType="POSModel.Recibo" />
+          <EntitySet Name="sysdiagrams" EntityType="POSModel.sysdiagram" />
+          <EntitySet Name="TipoFacturas" EntityType="POSModel.TipoFactura" />
+          <EntitySet Name="UnidadMedidas" EntityType="POSModel.UnidadMedida" />
+          <AssociationSet Name="FK_Productos_Almacen" Association="POSModel.FK_Productos_Almacen">
+            <End Role="Almacen" EntitySet="Almacens" />
+            <End Role="Producto" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Productos_Categoria" Association="POSModel.FK_Productos_Categoria">
+            <End Role="Categoria" EntitySet="Categorias" />
+            <End Role="Producto" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Contacto" Association="POSModel.FK_Factura_Contacto">
+            <End Role="Contacto" EntitySet="Contactoes" />
+            <End Role="Factura" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_TipoFacturas" Association="POSModel.FK_Factura_TipoFacturas">
+            <End Role="TipoFactura" EntitySet="TipoFacturas" />
+            <End Role="Factura" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacturaDetalle_Factura" Association="POSModel.FK_FacturaDetalle_Factura">
+            <End Role="Factura" EntitySet="Facturas" />
+            <End Role="FacturaDetalle" EntitySet="FacturaDetalles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recibo_Factura" Association="POSModel.FK_Recibo_Factura">
+            <End Role="Factura" EntitySet="Facturas" />
+            <End Role="Recibo" EntitySet="Reciboes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recibo_MetodoPago" Association="POSModel.FK_Recibo_MetodoPago">
+            <End Role="MetodoPago" EntitySet="MetodoPagoes" />
+            <End Role="Recibo" EntitySet="Reciboes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Productos_UnidadMedida" Association="POSModel.FK_Productos_UnidadMedida">
+            <End Role="UnidadMedida" EntitySet="UnidadMedidas" />
+            <End Role="Producto" EntitySet="Productos" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Almacen">
           <Key>
             <PropertyRef Name="Id" />
@@ -229,98 +325,6 @@
           <Property Name="Categoria1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Productos" Relationship="POSModel.FK_Productos_Categoria" FromRole="Categoria" ToRole="Producto" />
         </EntityType>
-        <EntityType Name="Factura">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdCliente" Type="Int32" />
-          <Property Name="IdTipo" Type="Int32" />
-          <Property Name="Total_Facturado" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Total_Pagado" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Total_Descuento" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Fecha_Facturacion" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Fecha_Vencimiento" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Contacto" Relationship="POSModel.FK_Factura_Contacto" FromRole="Factura" ToRole="Contacto" />
-          <NavigationProperty Name="TipoFactura" Relationship="POSModel.FK_Factura_TipoFacturas" FromRole="Factura" ToRole="TipoFactura" />
-          <NavigationProperty Name="FacturaDetalles" Relationship="POSModel.FK_FacturaDetalle_Factura" FromRole="Factura" ToRole="FacturaDetalle" />
-        </EntityType>
-        <EntityType Name="FacturaDetalle">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="IdArticulo" Type="Int32" />
-          <Property Name="Decripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Cantida" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IdFactura" Type="Int32" />
-          <NavigationProperty Name="Factura" Relationship="POSModel.FK_FacturaDetalle_Factura" FromRole="FacturaDetalle" ToRole="Factura" />
-        </EntityType>
-        <EntityType Name="Producto">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Producto1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Precio_Compra" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Precio_Venta" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IDAlmacen" Type="Int32" />
-          <Property Name="IDCategoria" Type="Int32" />
-          <Property Name="Stock" Type="Int32" />
-          <NavigationProperty Name="Almacen" Relationship="POSModel.FK_Productos_Almacen" FromRole="Producto" ToRole="Almacen" />
-          <NavigationProperty Name="Categoria" Relationship="POSModel.FK_Productos_Categoria" FromRole="Producto" ToRole="Categoria" />
-          <Property Name="CodigoBarra" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IDUnidad" Type="Int32" />
-          <NavigationProperty Name="UnidadMedida" Relationship="POSModel.FK_Productos_UnidadMedida" FromRole="Producto" ToRole="UnidadMedida" />
-        </EntityType>
-        <EntityType Name="Recibo">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDCliente" Type="Int32" />
-          <Property Name="IDFactura" Type="Int32" />
-          <Property Name="Pagado" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Fecha" Type="DateTime" Precision="3" />
-          <Property Name="IdMetodoPago" Type="Int32" />
-        </EntityType>
-        <EntityContainer Name="POSEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Almacens" EntityType="Self.Almacen" />
-          <EntitySet Name="Categorias" EntityType="Self.Categoria" />
-          <EntitySet Name="Facturas" EntityType="Self.Factura" />
-          <EntitySet Name="FacturaDetalles" EntityType="Self.FacturaDetalle" />
-          <EntitySet Name="Productos" EntityType="Self.Producto" />
-          <EntitySet Name="Reciboes" EntityType="Self.Recibo" />
-          <EntitySet Name="Contactoes" EntityType="POSModel.Contacto" />
-          <AssociationSet Name="FK_Productos_Almacen" Association="POSModel.FK_Productos_Almacen">
-            <End Role="Almacen" EntitySet="Almacens" />
-            <End Role="Producto" EntitySet="Productos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Productos_Categoria" Association="POSModel.FK_Productos_Categoria">
-            <End Role="Categoria" EntitySet="Categorias" />
-            <End Role="Producto" EntitySet="Productos" />
-          </AssociationSet>
-          <EntitySet Name="UnidadMedidas" EntityType="POSModel.UnidadMedida" />
-          <AssociationSet Name="FK_Productos_UnidadMedida" Association="POSModel.FK_Productos_UnidadMedida">
-            <End Role="UnidadMedida" EntitySet="UnidadMedidas" />
-            <End Role="Producto" EntitySet="Productos" />
-          </AssociationSet>
-          <EntitySet Name="TipoFacturas" EntityType="POSModel.TipoFactura" />
-          <AssociationSet Name="FK_Factura_Contacto" Association="POSModel.FK_Factura_Contacto">
-            <End Role="Contacto" EntitySet="Contactoes" />
-            <End Role="Factura" EntitySet="Facturas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Factura_TipoFacturas" Association="POSModel.FK_Factura_TipoFacturas">
-            <End Role="TipoFactura" EntitySet="TipoFacturas" />
-            <End Role="Factura" EntitySet="Facturas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FacturaDetalle_Factura" Association="POSModel.FK_FacturaDetalle_Factura">
-            <End Role="Factura" EntitySet="Facturas" />
-            <End Role="FacturaDetalle" EntitySet="FacturaDetalles" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Contacto">
           <Key>
             <PropertyRef Name="Id" />
@@ -338,6 +342,102 @@
           <Property Name="Empresa" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
           <Property Name="Proveedor" Type="Boolean" />
           <NavigationProperty Name="Facturas" Relationship="POSModel.FK_Factura_Contacto" FromRole="Contacto" ToRole="Factura" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="IdTipo" Type="Int32" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Total_Facturado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Pagado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total_Descuento" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fecha_Facturacion" Type="DateTime" Precision="3" />
+          <Property Name="Fecha_Vencimiento" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="Int32" />
+          <NavigationProperty Name="Contacto" Relationship="POSModel.FK_Factura_Contacto" FromRole="Factura" ToRole="Contacto" />
+          <NavigationProperty Name="TipoFactura" Relationship="POSModel.FK_Factura_TipoFacturas" FromRole="Factura" ToRole="TipoFactura" />
+          <NavigationProperty Name="FacturaDetalles" Relationship="POSModel.FK_FacturaDetalle_Factura" FromRole="Factura" ToRole="FacturaDetalle" />
+          <NavigationProperty Name="Reciboes" Relationship="POSModel.FK_Recibo_Factura" FromRole="Factura" ToRole="Recibo" />
+        </EntityType>
+        <EntityType Name="FacturaDetalle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFactura" Type="Int32" />
+          <Property Name="IdArticulo" Type="Int32" />
+          <Property Name="Decripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Cantida" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Factura" Relationship="POSModel.FK_FacturaDetalle_Factura" FromRole="FacturaDetalle" ToRole="Factura" />
+        </EntityType>
+        <EntityType Name="MetodoPago">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MetodoPago1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Reciboes" Relationship="POSModel.FK_Recibo_MetodoPago" FromRole="MetodoPago" ToRole="Recibo" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDAlmacen" Type="Int32" />
+          <Property Name="IDCategoria" Type="Int32" />
+          <Property Name="IDUnidad" Type="Int32" />
+          <Property Name="Producto1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Precio_Compra" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Precio_Venta" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Stock" Type="Int32" />
+          <Property Name="CodigoBarra" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Almacen" Relationship="POSModel.FK_Productos_Almacen" FromRole="Producto" ToRole="Almacen" />
+          <NavigationProperty Name="Categoria" Relationship="POSModel.FK_Productos_Categoria" FromRole="Producto" ToRole="Categoria" />
+          <NavigationProperty Name="UnidadMedida" Relationship="POSModel.FK_Productos_UnidadMedida" FromRole="Producto" ToRole="UnidadMedida" />
+        </EntityType>
+        <EntityType Name="Recibo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDFactura" Type="Int32" />
+          <Property Name="Pagado" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="IdMetodoPago" Type="Int32" />
+          <NavigationProperty Name="Factura" Relationship="POSModel.FK_Recibo_Factura" FromRole="Recibo" ToRole="Factura" />
+          <NavigationProperty Name="MetodoPago" Relationship="POSModel.FK_Recibo_MetodoPago" FromRole="Recibo" ToRole="MetodoPago" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TipoFactura">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Secuencia" Type="Int32" />
+          <Property Name="Grupo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Facturas" Relationship="POSModel.FK_Factura_TipoFacturas" FromRole="TipoFactura" ToRole="Factura" />
+        </EntityType>
+        <EntityType Name="UnidadMedida">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Productos" Relationship="POSModel.FK_Productos_UnidadMedida" FromRole="UnidadMedida" ToRole="Producto" />
         </EntityType>
         <Association Name="FK_Productos_Almacen">
           <End Type="POSModel.Almacen" Role="Almacen" Multiplicity="0..1" />
@@ -363,36 +463,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="UnidadMedida">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Productos" Relationship="POSModel.FK_Productos_UnidadMedida" FromRole="UnidadMedida" ToRole="Producto" />
-        </EntityType>
-        <Association Name="FK_Productos_UnidadMedida">
-          <End Type="POSModel.UnidadMedida" Role="UnidadMedida" Multiplicity="0..1" />
-          <End Type="POSModel.Producto" Role="Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UnidadMedida">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="IDUnidad" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="TipoFactura">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Secuencia" Type="Int32" />
-          <Property Name="Grupo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Facturas" Relationship="POSModel.FK_Factura_TipoFacturas" FromRole="TipoFactura" ToRole="Factura" />
-        </EntityType>
         <Association Name="FK_Factura_Contacto">
           <End Type="POSModel.Contacto" Role="Contacto" Multiplicity="0..1" />
           <End Type="POSModel.Factura" Role="Factura" Multiplicity="*" />
@@ -429,7 +499,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_Recibo_Factura">
+          <End Type="POSModel.Factura" Role="Factura" Multiplicity="0..1" />
+          <End Type="POSModel.Recibo" Role="Recibo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factura">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recibo">
+              <PropertyRef Name="IDFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recibo_MetodoPago">
+          <End Type="POSModel.MetodoPago" Role="MetodoPago" Multiplicity="0..1" />
+          <End Type="POSModel.Recibo" Role="Recibo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MetodoPago">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recibo">
+              <PropertyRef Name="IdMetodoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Productos_UnidadMedida">
+          <End Type="POSModel.UnidadMedida" Role="UnidadMedida" Multiplicity="0..1" />
+          <End Type="POSModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnidadMedida">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IDUnidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -438,70 +544,16 @@
           <EntitySetMapping Name="Almacens">
             <EntityTypeMapping TypeName="POSModel.Almacen">
               <MappingFragment StoreEntitySet="Almacen">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Almacen1" ColumnName="Almacen" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categorias">
             <EntityTypeMapping TypeName="POSModel.Categoria">
               <MappingFragment StoreEntitySet="Categoria">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Categoria1" ColumnName="Categoria" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Facturas">
-            <EntityTypeMapping TypeName="POSModel.Factura">
-              <MappingFragment StoreEntitySet="Factura">
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
-                <ScalarProperty Name="Total_Facturado" ColumnName="Total_Facturado" />
-                <ScalarProperty Name="Total_Pagado" ColumnName="Total_Pagado" />
-                <ScalarProperty Name="Total_Descuento" ColumnName="Total_Descuento" />
-                <ScalarProperty Name="Fecha_Facturacion" ColumnName="Fecha_Facturacion" />
-                <ScalarProperty Name="Fecha_Vencimiento" ColumnName="Fecha_Vencimiento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FacturaDetalles">
-            <EntityTypeMapping TypeName="POSModel.FacturaDetalle">
-              <MappingFragment StoreEntitySet="FacturaDetalle">
-                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
-                <ScalarProperty Name="Decripcion" ColumnName="Decripcion" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="Cantida" ColumnName="Cantida" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Productos">
-            <EntityTypeMapping TypeName="POSModel.Producto">
-              <MappingFragment StoreEntitySet="Productos">
-                <ScalarProperty Name="IDUnidad" ColumnName="IDUnidad" />
-                <ScalarProperty Name="CodigoBarra" ColumnName="CodigoBarra" />
-                <ScalarProperty Name="Stock" ColumnName="Stock" />
-                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
-                <ScalarProperty Name="IDAlmacen" ColumnName="IDAlmacen" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Producto1" ColumnName="Producto" />
-                <ScalarProperty Name="Precio_Compra" ColumnName="Precio_Compra" />
-                <ScalarProperty Name="Precio_Venta" ColumnName="Precio_Venta" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Reciboes">
-            <EntityTypeMapping TypeName="POSModel.Recibo">
-              <MappingFragment StoreEntitySet="Recibo">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
-                <ScalarProperty Name="IDFactura" ColumnName="IDFactura" />
-                <ScalarProperty Name="Pagado" ColumnName="Pagado" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="IdMetodoPago" ColumnName="IdMetodoPago" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -523,11 +575,76 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="UnidadMedidas">
-            <EntityTypeMapping TypeName="POSModel.UnidadMedida">
-              <MappingFragment StoreEntitySet="UnidadMedida">
-                <ScalarProperty Name="Name" ColumnName="Name" />
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="POSModel.Factura">
+              <MappingFragment StoreEntitySet="Factura">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_Vencimiento" ColumnName="Fecha_Vencimiento" />
+                <ScalarProperty Name="Fecha_Facturacion" ColumnName="Fecha_Facturacion" />
+                <ScalarProperty Name="Total_Descuento" ColumnName="Total_Descuento" />
+                <ScalarProperty Name="Total_Pagado" ColumnName="Total_Pagado" />
+                <ScalarProperty Name="Total_Facturado" ColumnName="Total_Facturado" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacturaDetalles">
+            <EntityTypeMapping TypeName="POSModel.FacturaDetalle">
+              <MappingFragment StoreEntitySet="FacturaDetalle">
+                <ScalarProperty Name="Cantida" ColumnName="Cantida" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Decripcion" ColumnName="Decripcion" />
+                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetodoPagoes">
+            <EntityTypeMapping TypeName="POSModel.MetodoPago">
+              <MappingFragment StoreEntitySet="MetodoPago">
+                <ScalarProperty Name="MetodoPago1" ColumnName="MetodoPago" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="POSModel.Producto">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="CodigoBarra" ColumnName="CodigoBarra" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Precio_Venta" ColumnName="Precio_Venta" />
+                <ScalarProperty Name="Precio_Compra" ColumnName="Precio_Compra" />
+                <ScalarProperty Name="Producto1" ColumnName="Producto" />
+                <ScalarProperty Name="IDUnidad" ColumnName="IDUnidad" />
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="IDAlmacen" ColumnName="IDAlmacen" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reciboes">
+            <EntityTypeMapping TypeName="POSModel.Recibo">
+              <MappingFragment StoreEntitySet="Recibo">
+                <ScalarProperty Name="IdMetodoPago" ColumnName="IdMetodoPago" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Pagado" ColumnName="Pagado" />
+                <ScalarProperty Name="IDFactura" ColumnName="IDFactura" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="POSModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -537,6 +654,14 @@
                 <ScalarProperty Name="Grupo" ColumnName="Grupo" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnidadMedidas">
+            <EntityTypeMapping TypeName="POSModel.UnidadMedida">
+              <MappingFragment StoreEntitySet="UnidadMedida">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

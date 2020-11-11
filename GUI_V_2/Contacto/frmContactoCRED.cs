@@ -108,7 +108,7 @@ namespace GUI_V_2.Contacto
                 forinsert.Email = emailTextBox.Text;
                 forinsert.Empresa = empresaTextBox.Text;
                 forinsert.Fax = faxTextBox.Text;
-                forinsert.Proveedor = true;
+                forinsert.Proveedor = false;
                 forinsert.RNC = rNCTextBox.Text;
                 forinsert.Telefonos = telefonosTextBox.Text;
                 forinsert.Celular = celularTextBox.Text;

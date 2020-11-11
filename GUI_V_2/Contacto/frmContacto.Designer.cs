@@ -30,36 +30,67 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmContacto));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.txtFiltroCliente = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.contactoDataGridView = new System.Windows.Forms.DataGridView();
-            this.código = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvcontacto = new System.Windows.Forms.DataGridView();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cedula = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RNC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Telefonos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fax = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Celular = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.contactoDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvcontacto)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.btnEditar);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1165, 100);
+            this.panel1.Size = new System.Drawing.Size(1165, 96);
             this.panel1.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.txtFiltroCliente);
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 70);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1165, 26);
+            this.panel3.TabIndex = 28;
+            // 
+            // txtFiltroCliente
+            // 
+            this.txtFiltroCliente.Dock = System.Windows.Forms.DockStyle.Right;
+            this.txtFiltroCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFiltroCliente.Location = new System.Drawing.Point(53, 0);
+            this.txtFiltroCliente.Name = "txtFiltroCliente";
+            this.txtFiltroCliente.Size = new System.Drawing.Size(1112, 26);
+            this.txtFiltroCliente.TabIndex = 26;
+            this.txtFiltroCliente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFiltroCliente_KeyPress);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 20);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Filtro";
             // 
             // button2
             // 
@@ -120,56 +151,50 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.contactoDataGridView);
+            this.panel2.Controls.Add(this.dgvcontacto);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 100);
+            this.panel2.Location = new System.Drawing.Point(0, 96);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1165, 520);
+            this.panel2.Size = new System.Drawing.Size(1165, 524);
             this.panel2.TabIndex = 1;
             // 
-            // contactoDataGridView
+            // dgvcontacto
             // 
-            this.contactoDataGridView.AllowUserToAddRows = false;
-            this.contactoDataGridView.AllowUserToDeleteRows = false;
-            this.contactoDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.contactoDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.código,
+            this.dgvcontacto.AllowUserToAddRows = false;
+            this.dgvcontacto.AllowUserToDeleteRows = false;
+            this.dgvcontacto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvcontacto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Codigo,
             this.Nombre,
-            this.Cedula,
-            this.RNC,
-            this.Direccion,
-            this.Telefonos,
-            this.Fax,
-            this.Celular,
-            this.Email});
-            this.contactoDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contactoDataGridView.Location = new System.Drawing.Point(0, 0);
-            this.contactoDataGridView.MultiSelect = false;
-            this.contactoDataGridView.Name = "contactoDataGridView";
-            this.contactoDataGridView.ReadOnly = true;
-            this.contactoDataGridView.RowHeadersWidth = 51;
-            this.contactoDataGridView.RowTemplate.Height = 24;
-            this.contactoDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.contactoDataGridView.Size = new System.Drawing.Size(1165, 520);
-            this.contactoDataGridView.TabIndex = 0;
+            this.Cedula});
+            this.dgvcontacto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvcontacto.Location = new System.Drawing.Point(0, 0);
+            this.dgvcontacto.MultiSelect = false;
+            this.dgvcontacto.Name = "dgvcontacto";
+            this.dgvcontacto.ReadOnly = true;
+            this.dgvcontacto.RowHeadersWidth = 51;
+            this.dgvcontacto.RowTemplate.Height = 24;
+            this.dgvcontacto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvcontacto.Size = new System.Drawing.Size(1165, 524);
+            this.dgvcontacto.TabIndex = 0;
             // 
-            // código
+            // Codigo
             // 
-            this.código.DataPropertyName = "id";
-            this.código.HeaderText = "Código";
-            this.código.MinimumWidth = 6;
-            this.código.Name = "código";
-            this.código.ReadOnly = true;
-            this.código.Width = 125;
+            this.Codigo.DataPropertyName = "Id";
+            this.Codigo.HeaderText = "Código";
+            this.Codigo.MinimumWidth = 6;
+            this.Codigo.Name = "Codigo";
+            this.Codigo.ReadOnly = true;
+            this.Codigo.Width = 125;
             // 
             // Nombre
             // 
+            this.Nombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Nombre.DataPropertyName = "Nombre";
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.MinimumWidth = 6;
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
-            this.Nombre.Width = 125;
             // 
             // Cedula
             // 
@@ -179,60 +204,6 @@
             this.Cedula.Name = "Cedula";
             this.Cedula.ReadOnly = true;
             this.Cedula.Width = 125;
-            // 
-            // RNC
-            // 
-            this.RNC.DataPropertyName = "RNC";
-            this.RNC.HeaderText = "RNC";
-            this.RNC.MinimumWidth = 6;
-            this.RNC.Name = "RNC";
-            this.RNC.ReadOnly = true;
-            this.RNC.Width = 125;
-            // 
-            // Direccion
-            // 
-            this.Direccion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Direccion.DataPropertyName = "Direccion";
-            this.Direccion.HeaderText = "Direccion";
-            this.Direccion.MinimumWidth = 6;
-            this.Direccion.Name = "Direccion";
-            this.Direccion.ReadOnly = true;
-            // 
-            // Telefonos
-            // 
-            this.Telefonos.DataPropertyName = "Telefonos";
-            this.Telefonos.HeaderText = "Telefonos";
-            this.Telefonos.MinimumWidth = 6;
-            this.Telefonos.Name = "Telefonos";
-            this.Telefonos.ReadOnly = true;
-            this.Telefonos.Width = 125;
-            // 
-            // Fax
-            // 
-            this.Fax.DataPropertyName = "Fax";
-            this.Fax.HeaderText = "Fax";
-            this.Fax.MinimumWidth = 6;
-            this.Fax.Name = "Fax";
-            this.Fax.ReadOnly = true;
-            this.Fax.Width = 125;
-            // 
-            // Celular
-            // 
-            this.Celular.DataPropertyName = "Celular";
-            this.Celular.HeaderText = "Celular";
-            this.Celular.MinimumWidth = 6;
-            this.Celular.Name = "Celular";
-            this.Celular.ReadOnly = true;
-            this.Celular.Width = 125;
-            // 
-            // Email
-            // 
-            this.Email.DataPropertyName = "Email";
-            this.Email.HeaderText = "Email";
-            this.Email.MinimumWidth = 6;
-            this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
-            this.Email.Width = 125;
             // 
             // frmContacto
             // 
@@ -245,8 +216,10 @@
             this.Text = "Cliente";
             this.Load += new System.EventHandler(this.frmContacto_Load);
             this.panel1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.contactoDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvcontacto)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -255,18 +228,15 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridView contactoDataGridView;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn código;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtFiltroCliente;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.DataGridView dgvcontacto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cedula;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RNC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Direccion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Telefonos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fax;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Celular;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
     }
 }

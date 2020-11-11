@@ -15,11 +15,11 @@ namespace GUI_V_2.Models
     public partial class FacturaDetalle
     {
         public int Id { get; set; }
+        public Nullable<int> IdFactura { get; set; }
         public Nullable<int> IdArticulo { get; set; }
         public string Decripcion { get; set; }
         public Nullable<decimal> Precio { get; set; }
         public Nullable<decimal> Cantida { get; set; }
-        public Nullable<int> IdFactura { get; set; }
     
         public virtual Factura Factura { get; set; }
     }

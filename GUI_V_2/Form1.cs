@@ -112,5 +112,16 @@ namespace GUI_V_2
         {
             AbrirFormEnPanel(new frmVenta());
         }
+
+        private void panelContenedor_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AbrirFormEnPanel(new frmcxc());
+
+        }
     }
 }

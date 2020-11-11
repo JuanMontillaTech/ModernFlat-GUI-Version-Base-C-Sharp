@@ -27,12 +27,14 @@ namespace GUI_V_2.Models
     
         public virtual DbSet<Almacen> Almacens { get; set; }
         public virtual DbSet<Categoria> Categorias { get; set; }
+        public virtual DbSet<Contacto> Contactoes { get; set; }
         public virtual DbSet<Factura> Facturas { get; set; }
         public virtual DbSet<FacturaDetalle> FacturaDetalles { get; set; }
+        public virtual DbSet<MetodoPago> MetodoPagoes { get; set; }
         public virtual DbSet<Producto> Productos { get; set; }
         public virtual DbSet<Recibo> Reciboes { get; set; }
-        public virtual DbSet<Contacto> Contactoes { get; set; }
-        public virtual DbSet<UnidadMedida> UnidadMedidas { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TipoFactura> TipoFacturas { get; set; }
+        public virtual DbSet<UnidadMedida> UnidadMedidas { get; set; }
     }
 }

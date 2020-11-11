@@ -18,21 +18,25 @@ namespace GUI_V_2.Models
         public Factura()
         {
             this.FacturaDetalles = new HashSet<FacturaDetalle>();
+            this.Reciboes = new HashSet<Recibo>();
         }
     
         public int Id { get; set; }
         public Nullable<int> IdCliente { get; set; }
         public Nullable<int> IdTipo { get; set; }
+        public string Tipo { get; set; }
         public Nullable<decimal> Total_Facturado { get; set; }
         public Nullable<decimal> Total_Pagado { get; set; }
         public Nullable<decimal> Total_Descuento { get; set; }
-        public Nullable<decimal> Fecha_Facturacion { get; set; }
-        public Nullable<decimal> Fecha_Vencimiento { get; set; }
-        public string Tipo { get; set; }
+        public Nullable<System.DateTime> Fecha_Facturacion { get; set; }
+        public Nullable<System.DateTime> Fecha_Vencimiento { get; set; }
+        public Nullable<int> Estado { get; set; }
     
         public virtual Contacto Contacto { get; set; }
         public virtual TipoFactura TipoFactura { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FacturaDetalle> FacturaDetalles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Recibo> Reciboes { get; set; }
     }
 }

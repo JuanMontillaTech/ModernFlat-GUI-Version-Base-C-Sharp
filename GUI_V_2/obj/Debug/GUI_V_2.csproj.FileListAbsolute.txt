@@ -60,3 +60,11 @@ C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V
 C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\GUI_V_2.Inventario.Productos.frmProducto.resources
 C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\GUI_V_2.Inventario.Productos.frmProductoCRED.resources
 C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\GUI_V_2.Facturacion.frmVenta.resources
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\bin\Debug\Spire.License.dll
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\bin\Debug\Spire.Pdf.dll
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\bin\Debug\Spire.XLS.dll
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\bin\Debug\Microsoft.mshtml.dll
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\bin\Debug\Spire.Pdf.xml
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\bin\Debug\Spire.XLS.xml
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\GUI_V_2.Facturacion.frmRecibo.resources
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\GUI_V_2.Facturacion.frmcxc.resources

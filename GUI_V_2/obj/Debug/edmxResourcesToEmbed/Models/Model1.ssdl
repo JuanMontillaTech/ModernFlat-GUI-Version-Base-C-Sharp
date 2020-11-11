@@ -42,19 +42,27 @@
     <Property Name="Total_Facturado" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Total_Pagado" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Total_Descuento" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Fecha_Facturacion" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Fecha_Vencimiento" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Fecha_Facturacion" Type="datetime" />
+    <Property Name="Fecha_Vencimiento" Type="datetime" />
+    <Property Name="Estado" Type="int" />
   </EntityType>
   <EntityType Name="FacturaDetalle">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdFactura" Type="int" />
     <Property Name="IdArticulo" Type="int" />
     <Property Name="Decripcion" Type="nvarchar(max)" />
     <Property Name="Precio" Type="numeric" Precision="18" Scale="2" />
     <Property Name="Cantida" Type="numeric" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="MetodoPago">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MetodoPago" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Productos">
     <Key>
@@ -75,11 +83,20 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IDCliente" Type="int" />
     <Property Name="IDFactura" Type="int" />
     <Property Name="Pagado" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Fecha" Type="datetime" />
     <Property Name="IdMetodoPago" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="TipoFacturas">
     <Key>
@@ -169,14 +186,40 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Recibo_Factura">
+    <End Role="Factura" Type="Self.Factura" Multiplicity="0..1" />
+    <End Role="Recibo" Type="Self.Recibo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Factura">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recibo">
+        <PropertyRef Name="IDFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recibo_MetodoPago">
+    <End Role="MetodoPago" Type="Self.MetodoPago" Multiplicity="0..1" />
+    <End Role="Recibo" Type="Self.Recibo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MetodoPago">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recibo">
+        <PropertyRef Name="IdMetodoPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="POSModelStoreContainer">
     <EntitySet Name="Almacen" EntityType="Self.Almacen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FacturaDetalle" EntityType="Self.FacturaDetalle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MetodoPago" EntityType="Self.MetodoPago" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Recibo" EntityType="Self.Recibo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoFacturas" EntityType="Self.TipoFacturas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UnidadMedida" EntityType="Self.UnidadMedida" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Factura_Contacto" Association="Self.FK_Factura_Contacto">
@@ -202,6 +245,14 @@
     <AssociationSet Name="FK_Productos_UnidadMedida" Association="Self.FK_Productos_UnidadMedida">
       <End Role="UnidadMedida" EntitySet="UnidadMedida" />
       <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recibo_Factura" Association="Self.FK_Recibo_Factura">
+      <End Role="Factura" EntitySet="Factura" />
+      <End Role="Recibo" EntitySet="Recibo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recibo_MetodoPago" Association="Self.FK_Recibo_MetodoPago">
+      <End Role="MetodoPago" EntitySet="MetodoPago" />
+      <End Role="Recibo" EntitySet="Recibo" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

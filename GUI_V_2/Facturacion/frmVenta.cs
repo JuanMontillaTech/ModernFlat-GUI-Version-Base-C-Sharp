@@ -1,4 +1,5 @@
-﻿using GUI_V_2.Models;
+﻿using GUI_V_2.Contacto;
+using GUI_V_2.Models;
 
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Printing;
+using GUI_V_2.Inventario.Productos;
 
 namespace GUI_V_2.Facturacion
 {
@@ -26,15 +29,25 @@ namespace GUI_V_2.Facturacion
         {
             using (POSEntities db = new POSEntities())
             {
-                var Rtipo = db.TipoFacturas.Where(x=> x.Grupo =="B").ToList();
+
+                var Rtipo = db.TipoFacturas.Where(x => x.Grupo == "B").ToList();
                 cbmTipo.DisplayMember = "Codigo";
                 cbmTipo.ValueMember = "id";
                 cbmTipo.DataSource = Rtipo;
-                ManagerNumeros = new ManagerNumeros();
-                txtnudoc.Text = ManagerNumeros.GetNumeroTipoFactura((int)cbmTipo.SelectedValue);
+                GetnuDoc();
             }
         }
 
+        private void GetnuDoc()
+        {
+            ManagerNumeros = new ManagerNumeros();
+            txtnudoc.Text = ManagerNumeros.GetNumeroTipoFactura((int)cbmTipo.SelectedValue);
+        }
+        private void UpdateDoc()
+        {
+            ManagerNumeros = new ManagerNumeros();
+              ManagerNumeros.SetNumeroTipoFactura((int)cbmTipo.SelectedValue);
+        }
         private void txtIDCliente_KeyPress(object sender, KeyPressEventArgs e)
         {
            
@@ -49,24 +62,25 @@ namespace GUI_V_2.Facturacion
         {
             try
             {
-
-                using (POSEntities db = new POSEntities())
-                {
-                    int idCliente = int.Parse(txtIDCliente.Text);
-                    var Cliente = db.Contactoes.Find(idCliente);
-                    if (Cliente != null)
-                    {
-                        txtNombreCliente.Text = Cliente.Nombre.ToUpper() +" " + Cliente.Apellido.ToUpper();
-                    }
-
-
-
-                }
+                BuscarClientePorID();
             }
             catch (Exception)
             {
 
                
+            }
+        }
+
+        private void BuscarClientePorID()
+        {
+            using (POSEntities db = new POSEntities())
+            {
+                int idCliente = int.Parse(txtIDCliente.Text);
+                var Cliente = db.Contactoes.Find(idCliente);
+                if (Cliente != null)
+                {
+                    txtNombreCliente.Text = Cliente.Nombre.ToUpper() + " " + Cliente.Apellido.ToUpper();
+                }
             }
         }
 
@@ -77,74 +91,74 @@ namespace GUI_V_2.Facturacion
 
         private void txtcbarra_Leave(object sender, EventArgs e)
         {
+            BuscarCodigoBarra(sender);
+        }
+
+        private void BuscarCodigoBarra(object sender)
+        {
             string CodigoBarra = ((TextBox)sender).Text;
             Producto ArticuloF;
-            bool Valida = true;
+            
             using (POSEntities db = new POSEntities())
             {
-
                 ArticuloF = db.Productos.Where(x => x.CodigoBarra == CodigoBarra).FirstOrDefault();
-
-                if (ArticuloF != null)
-                {
-
-                    ListITemSell = new List<Itemsell>();
-                    foreach (DataGridViewRow rowI in dgvData.Rows)
-                    {
-                        int IDSave = int.Parse(rowI.Cells[0].Value.ToString());
-                        decimal cantidad = 1;
-                        if (ArticuloF.Id == IDSave)
-                        {
-                            cantidad = decimal.Parse(rowI.Cells[3].Value.ToString()) + 1;
-                            Valida = false;
-
-                        }
-
-                        ListITemSell.Add(new Itemsell()
-                        {
-                            IdArticulo = IDSave,
-                            Articulo = rowI.Cells[1].Value.ToString(),
-                            UnidadMedida = rowI.Cells[2].Value.ToString(),
-                            Cantidad = cantidad,
-                            PrecioUnidad = decimal.Parse(rowI.Cells[4].Value.ToString()),
-                            PrecioTotal = cantidad * decimal.Parse(rowI.Cells[5].Value.ToString()),
-                            PrecioCompra = decimal.Parse(rowI.Cells[5].Value.ToString())
-
-                        });
-
-                    }
-                    if (Valida)
-                    {
-
-
-
-
-                        ListITemSell.Add(new Itemsell()
-                        {
-                            IdArticulo = ArticuloF.Id,
-                            Articulo = ArticuloF.Producto1,
-                            Cantidad = 1,
-                            PrecioUnidad = ArticuloF.Precio_Venta,
-                            PrecioTotal = ArticuloF.Precio_Venta * 1,
-                            UnidadMedida = ArticuloF.UnidadMedida.Name,
-                            PrecioCompra = ArticuloF.Precio_Compra
-                        });
-
-
-
-
-                    }
-                    dgvData.DataSource = ListITemSell;
-                    GrvRecalcula();
-                    txtcbarra.Text = string.Empty;
-                    txtcbarra.Focus();
-                }
-                else
-                {
-                    txtcbarra.Text = string.Empty;
-                   
-                }
+                var resultado = CargarProducto(ArticuloF);
             }
+        }
+
+        private bool CargarProducto(Producto ArticuloF )
+        {
+            bool Valida = true;
+            if (ArticuloF != null)
+            {
+                ListITemSell = new List<Itemsell>();
+                foreach (DataGridViewRow rowI in dgvData.Rows)
+                {
+                    int IDSave = int.Parse(rowI.Cells[0].Value.ToString());
+                    decimal cantidad = 1;
+                    if (ArticuloF.Id == IDSave)
+                    {
+                        cantidad = decimal.Parse(rowI.Cells[3].Value.ToString()) + 1;
+                        Valida = false;
+                    }
+                    ListITemSell.Add(new Itemsell()
+                    {
+                        IdArticulo = IDSave,
+                        Articulo = rowI.Cells[1].Value.ToString(),
+                        UnidadMedida = rowI.Cells[2].Value.ToString(),
+                        Cantidad = cantidad,
+                        PrecioUnidad = decimal.Parse(rowI.Cells[4].Value.ToString()),
+                        PrecioTotal = cantidad * decimal.Parse(rowI.Cells[5].Value.ToString()),
+                        PrecioCompra = decimal.Parse(rowI.Cells[5].Value.ToString())
+
+                    });
+
+                }
+                if (Valida)
+                {
+                    ListITemSell.Add(new Itemsell()
+                    {
+                        IdArticulo = ArticuloF.Id,
+                        Articulo = ArticuloF.Producto1,
+                        Cantidad = 1,
+                        PrecioUnidad = ArticuloF.Precio_Venta,
+                        PrecioTotal = ArticuloF.Precio_Venta * 1,
+                        UnidadMedida = ArticuloF.UnidadMedida.Name,
+                        PrecioCompra = ArticuloF.Precio_Compra
+                    });
+                }
+                dgvData.DataSource = ListITemSell;
+                GrvRecalcula();
+                txtcbarra.Text = string.Empty;
+                txtcbarra.Focus();
+            }
+            else
+            {
+                txtcbarra.Text = string.Empty;
+
+            }
+
+            return Valida;
         }
 
         private void dgvData_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -267,7 +281,210 @@ namespace GUI_V_2.Facturacion
         {
             GrvRecalcula();
         }
+
+        private void btnClientes_Click(object sender, EventArgs e)
+        {
+            frmContacto frmContactos = new frmContacto(1);
+            frmContactos.ShowDialog();
+            int? id = frmContactos.GetIdRow();
+            txtIDCliente.Text = id.ToString();
+            try
+            {
+                BuscarClientePorID();
+            }
+            catch (Exception)
+            {
+
+
+            }
+        }
+
+        private void txtNombreCliente_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //Do something
+                e.Handled = true;
+            }
+        }
+
+        private void txtcbarra_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtcbarra_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                BuscarCodigoBarra(sender);
+            }
+             
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            printDocument1 = new PrintDocument();
+            PrinterSettings ps = new PrinterSettings();
+            printDocument1.PrinterSettings = ps;
+            printDocument1.PrintPage += Imprimir;
+            printDocument1.Print();
+        }
+        private void Imprimir(object sender, PrintPageEventArgs e) {
+
+            Font font = new Font("Arial",14, GraphicsUnit.Point);
+            int width = 200;
+            int y = 20;
+            e.Graphics.DrawString("Un ticket Felix", font,Brushes.Black,new RectangleF(0,y+=20,width,20));
+            e.Graphics.DrawString("Un ticket Felix 2", font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            frmProducto  productos = new frmProducto();
+            productos.ShowDialog();
+            int? id = productos.GetIdRow(); 
+
+            try
+            {
+
+                using (POSEntities db = new POSEntities())
+                {
+                   var  ArticuloF = db.Productos.Find(id);
+                    var resultado = CargarProducto(ArticuloF);
+                }
+            }
+            catch (Exception)
+            {
+
+
+            }
+        }
+
+        private void btnFacturar_Click(object sender, EventArgs e)
+        {
+           var Factura= CrearFactura(1);
+            Settoprint();
+            ClearForm();
+
+        }
+
+        private Factura CrearFactura(int Estado)
+        {
+            ListITemSell = new List<Itemsell>();
+          
+
+            foreach (DataGridViewRow rowI in dgvData.Rows)
+            {
+                int IDSave = int.Parse(rowI.Cells[0].Value.ToString());
+                decimal TotalRow = decimal.Parse(rowI.Cells[3].Value.ToString()) * decimal.Parse(rowI.Cells[4].Value.ToString());
+                ListITemSell.Add(new Itemsell()
+                {
+                    IdArticulo = IDSave,
+                    Articulo = rowI.Cells[1].Value.ToString(),
+                    UnidadMedida = rowI.Cells[2].Value.ToString(),
+                    Cantidad = decimal.Parse(rowI.Cells[3].Value.ToString()),
+                    PrecioUnidad = decimal.Parse(rowI.Cells[4].Value.ToString()),
+                    PrecioTotal = TotalRow,
+                    PrecioCompra = decimal.Parse(rowI.Cells[5].Value.ToString())
+
+                });
+
+            }
+
+            Factura factura = new Factura();
+            factura.IdCliente = int.Parse(txtIDCliente.Text);
+            factura.IdTipo = (int)cbmTipo.SelectedValue;
+            factura.Tipo = txtnudoc.Text;
+            factura.Total_Facturado = decimal.Parse(txtTotal.Text);
+            factura.Total_Descuento = string.IsNullOrEmpty(txtDecuento.Text) ? 0 : decimal.Parse(txtDecuento.Text);
+            factura.Fecha_Facturacion = DateTime.Now;
+            factura.Fecha_Vencimiento = Estado == 1 ? DateTime.Now.AddDays(30) : DateTime.Now;
+            factura.Estado = Estado;
+            using (var db = new POSEntities())
+            {
+                db.Facturas.Add(factura);
+                db.SaveChanges();
+                foreach (var item in ListITemSell)
+                {
+
+
+
+                    FacturaDetalle fd = new FacturaDetalle();
+                    fd.IdFactura = factura.Id;
+                    fd.IdArticulo = item.IdArticulo;
+                    fd.Decripcion = item.Articulo;
+                    fd.Cantida = item.Cantidad;
+                    fd.Precio = item.PrecioUnidad;
+                    db.FacturaDetalles.Add(fd);
+                    db.SaveChanges();
+
+
+                }
+
+
+            }
+          
+            return factura;
+        }
+
+        private void Settoprint( )
+        {
+            printDocument1 = new PrintDocument();
+            PrinterSettings ps = new PrinterSettings();
+            printDocument1.PrinterSettings = ps;
+            printDocument1.PrintPage += ImprimirFact;
+            printDocument1.Print();
+        }
+        private void ImprimirFact(object sender, PrintPageEventArgs e)
+        {
+            using (var db = new POSEntities())
+            {
+
+
+                Factura fac = db.Facturas.Where(x => x.Tipo == txtnudoc.Text).FirstOrDefault();
+
+                Font font = new Font("Arial", 10, GraphicsUnit.Point);
+                int width = 200;
+                int y = 20;
+                e.Graphics.DrawString("FERRETERIA NAPOLES " , font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+                e.Graphics.DrawString("FACTURA# : " + fac.Tipo, font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+                e.Graphics.DrawString("FECHA: " + fac.Fecha_Facturacion.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+                e.Graphics.DrawString("VENCIMIENTO: " + fac.Fecha_Facturacion.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+                e.Graphics.DrawString("-----------------", font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+                foreach (FacturaDetalle item in fac.FacturaDetalles)
+                {
+                    e.Graphics.DrawString(item.Decripcion +" "+ item.Cantida.ToString() + " "+ item.Precio.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+
+                }
+                e.Graphics.DrawString("-----------------", font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+
+                e.Graphics.DrawString("Total: " + fac.Total_Facturado.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+                e.Graphics.DrawString("Descuento: " + fac.Total_Descuento.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+                e.Graphics.DrawString("Total Pagado" + fac.Total_Pagado.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+
+
+            }
+
+        }
+        public void ClearForm()
+        {
+            UpdateDoc();
+            ListITemSell = new List<Itemsell>();
+
+            dgvData.DataSource = ListITemSell;
+            txtcbarra.Text = "";
+            txtFecha.Text = "";
+            txtIDCliente.Text = "";
+            txtMoneda.Text = "";
+            txtNombreCliente.Text = "";
+            txtSubtotal.Text = "";
+            txtTotal.Text = "";
+            GetnuDoc();
+             }
     }
+    
     public class Itemsell
     {
         public int IdArticulo { get; set; }
