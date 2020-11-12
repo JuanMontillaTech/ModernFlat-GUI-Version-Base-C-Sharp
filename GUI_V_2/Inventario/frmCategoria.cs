@@ -21,16 +21,58 @@ namespace GUI_V_2.Inventario
 
         private void categoriaBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            this.categoriaBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.pOSDataSet);
+         
 
         }
 
         private void frmCategoria_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'pOSDataSet.Categoria' table. You can move, or remove it, as needed.
-            this.categoriaTableAdapter.Fill(this.pOSDataSet.Categoria);
+            GetData();
+
+        }
+        public void GetData() {
+
+            using (var db = new POSEntities())
+            { 
+                var query = from p in db.Categorias.ToList()
+                            select new
+                            {
+                                id = p.Id,
+                                categoria = p.Categoria1
+                            };
+
+                grvData.DataSource = query.ToList();
+                    
+                    
+                    
+                    }
+
+         
+
+
+        }
+        public void GetData(string filtro)
+        {
+
+            using (var db = new POSEntities())
+            {
+                var query = from p in db.Categorias.ToList()
+                            select new
+                            {
+                                id = p.Id,
+                                categoria = p.Categoria1
+                            };
+
+                var result = query.Where(x => x.categoria.ToUpper().Contains(filtro.ToUpper())).ToList();
+                grvData.DataSource = result;
+
+
+
+            }
+
+
+
 
         }
 
@@ -39,8 +81,7 @@ namespace GUI_V_2.Inventario
 
             frmCategoriaCRED frmCategoriaCRED = new frmCategoriaCRED();
             frmCategoriaCRED.ShowDialog();
-
-            this.categoriaTableAdapter.Fill(this.pOSDataSet.Categoria);
+            GetData();
 
         }
 
@@ -48,7 +89,7 @@ namespace GUI_V_2.Inventario
         {
             try
             {
-               return  int.Parse(categoriaDataGridView.Rows[categoriaDataGridView.CurrentRow.Index].Cells[0].Value.ToString());
+               return  int.Parse(grvData.Rows[grvData.CurrentRow.Index].Cells[0].Value.ToString());
             }
             catch (Exception)
             {
@@ -64,7 +105,7 @@ namespace GUI_V_2.Inventario
             {
                 frmCategoriaCRED frmCategoriaCRED = new frmCategoriaCRED(Id);
                 frmCategoriaCRED.ShowDialog();
-                this.categoriaTableAdapter.Fill(this.pOSDataSet.Categoria);
+                GetData();
             }
         }
 
@@ -86,7 +127,7 @@ namespace GUI_V_2.Inventario
                             db.Categorias.Remove(forDelete);
                             MessageBox.Show("Registro Eliminado");
                             db.SaveChanges();
-                            this.categoriaTableAdapter.Fill(this.pOSDataSet.Categoria);
+                            GetData();
                         }
 
 
@@ -105,6 +146,11 @@ namespace GUI_V_2.Inventario
         private void button2_Click(object sender, EventArgs e)
         {
             Eliminar();
+        }
+
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            GetData(txtFiltro.Text.ToUpper());
         }
     }
 }

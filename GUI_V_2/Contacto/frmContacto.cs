@@ -43,12 +43,19 @@ namespace GUI_V_2.Contacto
             // TODO: This line of code loads data into the 'pOSDataSet.Contacto' table. You can move, or remove it, as needed.
             //this.contactoTableAdapter.Fill(this.pOSDataSet.Contacto);
             GetGRV();
+            
+            this.txtFiltroCliente.Focus();
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmContactoCRED   contactoCRED = new frmContactoCRED(id);
+            NuevoContato();
+        }
+
+        private void NuevoContato()
+        {
+            frmContactoCRED contactoCRED = new frmContactoCRED(id);
             contactoCRED.ShowDialog();
 
             GetGRV();
@@ -78,10 +85,15 @@ namespace GUI_V_2.Contacto
         }
         private void btnEditar_Click(object sender, EventArgs e)
         {
+            EditarContacto();
+        }
+
+        private void EditarContacto()
+        {
             int? Id = GetIdRow();
             if (Id != null)
             {
-                frmContactoCRED  frmContactoCRED = new frmContactoCRED(id,Id);
+                frmContactoCRED frmContactoCRED = new frmContactoCRED(id, Id);
                 frmContactoCRED.ShowDialog();
                 GetGRV();
             }
@@ -165,6 +177,29 @@ namespace GUI_V_2.Contacto
         {
 
             GetGRV(((TextBox)sender).Text);
+        }
+
+        private void frmContacto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void frmContacto_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    this.Close();
+                    break;
+                case Keys.F1:
+                    NuevoContato();
+                    break;
+                case Keys.F2:
+                    EditarContacto();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

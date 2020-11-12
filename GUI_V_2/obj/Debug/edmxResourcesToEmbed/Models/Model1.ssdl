@@ -12,7 +12,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Categoria" Type="nvarchar" MaxLength="50" />
+    <Property Name="Categoria" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Contacto">
     <Key>
@@ -57,6 +57,19 @@
     <Property Name="Precio" Type="numeric" Precision="18" Scale="2" />
     <Property Name="Cantida" Type="numeric" Precision="18" Scale="2" />
   </EntityType>
+  <EntityType Name="Materiales">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="DESCRIPCION" Type="nvarchar(max)" />
+    <Property Name="UND" Type="nvarchar(max)" />
+    <Property Name="PU_ITBIS" Type="nvarchar" MaxLength="50" />
+    <Property Name="PU_SIN_ITBIS" Type="nvarchar" MaxLength="50" />
+    <Property Name="RENDIMIENTOS_OBS" Type="nvarchar" MaxLength="50" />
+    <Property Name="SUPLIDOR_RECOMENDADO" Type="nvarchar" MaxLength="50" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Padre" Type="int" />
+  </EntityType>
   <EntityType Name="MetodoPago">
     <Key>
       <PropertyRef Name="Id" />
@@ -72,11 +85,12 @@
     <Property Name="IDAlmacen" Type="int" />
     <Property Name="IDCategoria" Type="int" />
     <Property Name="IDUnidad" Type="int" />
-    <Property Name="Producto" Type="nvarchar" MaxLength="50" />
+    <Property Name="Producto" Type="nvarchar(max)" />
     <Property Name="Precio_Compra" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Precio_Venta" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Stock" Type="int" />
     <Property Name="CodigoBarra" Type="nvarchar(max)" />
+    <Property Name="Precio_SinITBIS" Type="decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="Recibo">
     <Key>
@@ -216,6 +230,7 @@
     <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FacturaDetalle" EntityType="Self.FacturaDetalle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Materiales" EntityType="Self.Materiales" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MetodoPago" EntityType="Self.MetodoPago" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Recibo" EntityType="Self.Recibo" Schema="dbo" store:Type="Tables" />

@@ -24,6 +24,8 @@ namespace GUI_V_2.Facturacion
         {
             InitializeComponent();
             StartDDL();
+            this.txtIDCliente.Focus();
+          
         }
         public void StartDDL()
         {
@@ -37,7 +39,20 @@ namespace GUI_V_2.Facturacion
                 GetnuDoc();
             }
         }
+        private void KeyEvent(object sender, KeyEventArgs e) //Keyup Event 
+        {
+            if (e.KeyCode == Keys.F9)
+            {
+                MessageBox.Show("Function F9");
+            }
+            if (e.KeyCode == Keys.F6)
+            {
+                MessageBox.Show("Function F6");
+            }
+            else
+                MessageBox.Show("No Function");
 
+        }
         private void GetnuDoc()
         {
             ManagerNumeros = new ManagerNumeros();
@@ -91,7 +106,7 @@ namespace GUI_V_2.Facturacion
 
         private void txtcbarra_Leave(object sender, EventArgs e)
         {
-            BuscarCodigoBarra(sender);
+            
         }
 
         private void BuscarCodigoBarra(object sender)
@@ -248,7 +263,7 @@ namespace GUI_V_2.Facturacion
                     "Cantidad no puede estar en blanco";
                 e.Cancel = true;
             }
-            if (int.Parse(e.FormattedValue.ToString()) <= 0)
+            if (decimal.Parse(e.FormattedValue.ToString()) <= -1)
             {
                 dgvData.Rows[e.RowIndex].ErrorText =
                     "Cantidad no puede ser cero";
@@ -284,10 +299,16 @@ namespace GUI_V_2.Facturacion
 
         private void btnClientes_Click(object sender, EventArgs e)
         {
+            CargarCliente();
+        }
+
+        private void CargarCliente()
+        {
             frmContacto frmContactos = new frmContacto(1);
             frmContactos.ShowDialog();
             int? id = frmContactos.GetIdRow();
             txtIDCliente.Text = id.ToString();
+            txtIDCliente.Enabled = false;
             try
             {
                 BuscarClientePorID();
@@ -342,16 +363,21 @@ namespace GUI_V_2.Facturacion
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            frmProducto  productos = new frmProducto();
+            CargarProductos();
+        }
+
+        private void CargarProductos()
+        {
+            frmProducto productos = new frmProducto();
             productos.ShowDialog();
-            int? id = productos.GetIdRow(); 
+            int? id = productos.GetIdRow();
 
             try
             {
 
                 using (POSEntities db = new POSEntities())
                 {
-                   var  ArticuloF = db.Productos.Find(id);
+                    var ArticuloF = db.Productos.Find(id);
                     var resultado = CargarProducto(ArticuloF);
                 }
             }
@@ -364,9 +390,24 @@ namespace GUI_V_2.Facturacion
 
         private void btnFacturar_Click(object sender, EventArgs e)
         {
-           var Factura= CrearFactura(1);
-            Settoprint();
-            ClearForm();
+            if (!string.IsNullOrEmpty(txtIDCliente.Text))
+            {
+                if (dgvData.Rows.Count >= 1)
+                {
+                    var Factura = CrearFactura(1);
+                    Settoprint();
+                    ClearForm();
+                }
+                else
+                {
+                    MessageBox.Show("La factura no tiene detalle");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un clinete");
+            }
+           
 
         }
 
@@ -445,24 +486,31 @@ namespace GUI_V_2.Facturacion
 
                 Factura fac = db.Facturas.Where(x => x.Tipo == txtnudoc.Text).FirstOrDefault();
 
-                Font font = new Font("Arial", 10, GraphicsUnit.Point);
-                int width = 200;
+                Font font = new Font("Arial", 9, GraphicsUnit.Point);
+                int width = 300;
+                string line = "";
+                for (int i = 0; i < width; i++)
+                {
+                    line += "-";
+                }
                 int y = 20;
                 e.Graphics.DrawString("FERRETERIA NAPOLES " , font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+                e.Graphics.DrawString("Calle penetración # 17 Recidencial Amalia", font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+                e.Graphics.DrawString("829-921-7825", font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
                 e.Graphics.DrawString("FACTURA# : " + fac.Tipo, font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
                 e.Graphics.DrawString("FECHA: " + fac.Fecha_Facturacion.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
                 e.Graphics.DrawString("VENCIMIENTO: " + fac.Fecha_Facturacion.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
-                e.Graphics.DrawString("-----------------", font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+                e.Graphics.DrawString(line, font, Brushes.Black, new RectangleF(0, y += 10, width, 20));
+                e.Graphics.DrawString("CANt.  DESCRIPCION                          VALOR   ", font, Brushes.Black, new RectangleF(0, y += 10, width, 20)); 
+                e.Graphics.DrawString(line, font, Brushes.Black, new RectangleF(0, y += 5, width, 20));
                 foreach (FacturaDetalle item in fac.FacturaDetalles)
                 {
-                    e.Graphics.DrawString(item.Decripcion +" "+ item.Cantida.ToString() + " "+ item.Precio.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+                e.Graphics.DrawString(item.Cantida.ToString() + " "+item.Decripcion.Substring(0,22) +" "+ item.Precio.ToString(), font, Brushes.Black, new RectangleF(0, y += 10, width, 20));
 
                 }
-                e.Graphics.DrawString("-----------------", font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
-
-                e.Graphics.DrawString("Total: " + fac.Total_Facturado.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
-                e.Graphics.DrawString("Descuento: " + fac.Total_Descuento.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
-                e.Graphics.DrawString("Total Pagado" + fac.Total_Pagado.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+                e.Graphics.DrawString(line, font, Brushes.Black, new RectangleF(0, y += 5, width, 20)); 
+                e.Graphics.DrawString("DESCUENTO: " + fac.Total_Descuento.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+                e.Graphics.DrawString("TOTAL A PAGAR " + fac.Total_Facturado.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
 
 
             }
@@ -474,17 +522,49 @@ namespace GUI_V_2.Facturacion
             ListITemSell = new List<Itemsell>();
 
             dgvData.DataSource = ListITemSell;
-            txtcbarra.Text = "";
-            txtFecha.Text = "";
+            txtcbarra.Text = ""; 
             txtIDCliente.Text = "";
             txtMoneda.Text = "";
             txtNombreCliente.Text = "";
             txtSubtotal.Text = "";
             txtTotal.Text = "";
+            txtIDCliente.Enabled = true;
             GetnuDoc();
              }
+
+        private void frmVenta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+             
+                //MessageBox.Show($"Form.KeyPress: '{e.KeyChar}' pressed.");
+
+            
+             
+        }
+
+        private void frmVenta_Load(object sender, EventArgs e)
+        {
+            this.txtIDCliente.Focus();
+
+        }
+
+        private void frmVenta_KeyUp(object sender, KeyEventArgs e)
+        {
+            
+                switch (e.KeyCode)
+                {
+                    case Keys.F1:
+                    CargarCliente();
+                        break;
+                case Keys.F2:
+                    CargarProductos();
+                    break;
+                default:
+                        break;
+                }
+             
+        }
     }
-    
+
     public class Itemsell
     {
         public int IdArticulo { get; set; }

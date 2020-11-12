@@ -159,6 +159,9 @@
     <Compile Include="Models\FacturaDetalle.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Materiale.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MetodoPago.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -223,6 +226,12 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InicioResumen.es-DO.resx">
+      <DependentUpon>InicioResumen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InicioResumen.es-EC.resx">
+      <DependentUpon>InicioResumen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InicioResumen.resx">
       <DependentUpon>InicioResumen.cs</DependentUpon>
     </EmbeddedResource>
@@ -261,6 +270,7 @@
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="Ib\key.pfx" />
+    <None Include="Ib\Materiales e Insumos Sto. Dgo. ConstruCosto.do OCT2020.xlsx" />
     <None Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>

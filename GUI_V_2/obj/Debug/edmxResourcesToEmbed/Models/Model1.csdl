@@ -2,24 +2,14 @@
 <Schema Namespace="POSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="POSEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Almacens" EntityType="POSModel.Almacen" />
-    <EntitySet Name="Categorias" EntityType="POSModel.Categoria" />
     <EntitySet Name="Contactoes" EntityType="POSModel.Contacto" />
     <EntitySet Name="Facturas" EntityType="POSModel.Factura" />
     <EntitySet Name="FacturaDetalles" EntityType="POSModel.FacturaDetalle" />
     <EntitySet Name="MetodoPagoes" EntityType="POSModel.MetodoPago" />
-    <EntitySet Name="Productos" EntityType="POSModel.Producto" />
     <EntitySet Name="Reciboes" EntityType="POSModel.Recibo" />
     <EntitySet Name="sysdiagrams" EntityType="POSModel.sysdiagram" />
     <EntitySet Name="TipoFacturas" EntityType="POSModel.TipoFactura" />
     <EntitySet Name="UnidadMedidas" EntityType="POSModel.UnidadMedida" />
-    <AssociationSet Name="FK_Productos_Almacen" Association="POSModel.FK_Productos_Almacen">
-      <End Role="Almacen" EntitySet="Almacens" />
-      <End Role="Producto" EntitySet="Productos" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Productos_Categoria" Association="POSModel.FK_Productos_Categoria">
-      <End Role="Categoria" EntitySet="Categorias" />
-      <End Role="Producto" EntitySet="Productos" />
-    </AssociationSet>
     <AssociationSet Name="FK_Factura_Contacto" Association="POSModel.FK_Factura_Contacto">
       <End Role="Contacto" EntitySet="Contactoes" />
       <End Role="Factura" EntitySet="Facturas" />
@@ -40,6 +30,17 @@
       <End Role="MetodoPago" EntitySet="MetodoPagoes" />
       <End Role="Recibo" EntitySet="Reciboes" />
     </AssociationSet>
+    <EntitySet Name="Categorias" EntityType="POSModel.Categoria" />
+    <EntitySet Name="Materiales" EntityType="POSModel.Materiale" />
+    <EntitySet Name="Productos" EntityType="POSModel.Producto" />
+    <AssociationSet Name="FK_Productos_Almacen" Association="POSModel.FK_Productos_Almacen">
+      <End Role="Almacen" EntitySet="Almacens" />
+      <End Role="Producto" EntitySet="Productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Productos_Categoria" Association="POSModel.FK_Productos_Categoria">
+      <End Role="Categoria" EntitySet="Categorias" />
+      <End Role="Producto" EntitySet="Productos" />
+    </AssociationSet>
     <AssociationSet Name="FK_Productos_UnidadMedida" Association="POSModel.FK_Productos_UnidadMedida">
       <End Role="UnidadMedida" EntitySet="UnidadMedidas" />
       <End Role="Producto" EntitySet="Productos" />
@@ -52,14 +53,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Almacen1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Productos" Relationship="POSModel.FK_Productos_Almacen" FromRole="Almacen" ToRole="Producto" />
-  </EntityType>
-  <EntityType Name="Categoria">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Categoria1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Productos" Relationship="POSModel.FK_Productos_Categoria" FromRole="Categoria" ToRole="Producto" />
   </EntityType>
   <EntityType Name="Contacto">
     <Key>
@@ -118,23 +111,6 @@
     <Property Name="MetodoPago1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Reciboes" Relationship="POSModel.FK_Recibo_MetodoPago" FromRole="MetodoPago" ToRole="Recibo" />
   </EntityType>
-  <EntityType Name="Producto">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IDAlmacen" Type="Int32" />
-    <Property Name="IDCategoria" Type="Int32" />
-    <Property Name="IDUnidad" Type="Int32" />
-    <Property Name="Producto1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Precio_Compra" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Precio_Venta" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Stock" Type="Int32" />
-    <Property Name="CodigoBarra" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Almacen" Relationship="POSModel.FK_Productos_Almacen" FromRole="Producto" ToRole="Almacen" />
-    <NavigationProperty Name="Categoria" Relationship="POSModel.FK_Productos_Categoria" FromRole="Producto" ToRole="Categoria" />
-    <NavigationProperty Name="UnidadMedida" Relationship="POSModel.FK_Productos_UnidadMedida" FromRole="Producto" ToRole="UnidadMedida" />
-  </EntityType>
   <EntityType Name="Recibo">
     <Key>
       <PropertyRef Name="Id" />
@@ -175,30 +151,6 @@
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Productos" Relationship="POSModel.FK_Productos_UnidadMedida" FromRole="UnidadMedida" ToRole="Producto" />
   </EntityType>
-  <Association Name="FK_Productos_Almacen">
-    <End Type="POSModel.Almacen" Role="Almacen" Multiplicity="0..1" />
-    <End Type="POSModel.Producto" Role="Producto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Almacen">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Producto">
-        <PropertyRef Name="IDAlmacen" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Productos_Categoria">
-    <End Type="POSModel.Categoria" Role="Categoria" Multiplicity="0..1" />
-    <End Type="POSModel.Producto" Role="Producto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Categoria">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Producto">
-        <PropertyRef Name="IDCategoria" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Factura_Contacto">
     <End Type="POSModel.Contacto" Role="Contacto" Multiplicity="0..1" />
     <End Type="POSModel.Factura" Role="Factura" Multiplicity="*" />
@@ -256,6 +208,69 @@
       </Principal>
       <Dependent Role="Recibo">
         <PropertyRef Name="IdMetodoPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Categoria1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Productos" Relationship="POSModel.FK_Productos_Categoria" FromRole="Categoria" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Materiale">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UND" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PU_ITBIS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PU_SIN_ITBIS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RENDIMIENTOS_OBS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SUPLIDOR_RECOMENDADO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Padre" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDAlmacen" Type="Int32" />
+    <Property Name="IDCategoria" Type="Int32" />
+    <Property Name="IDUnidad" Type="Int32" />
+    <Property Name="Producto1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Precio_Compra" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Precio_Venta" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Stock" Type="Int32" />
+    <Property Name="CodigoBarra" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Precio_SinITBIS" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Almacen" Relationship="POSModel.FK_Productos_Almacen" FromRole="Producto" ToRole="Almacen" />
+    <NavigationProperty Name="Categoria" Relationship="POSModel.FK_Productos_Categoria" FromRole="Producto" ToRole="Categoria" />
+    <NavigationProperty Name="UnidadMedida" Relationship="POSModel.FK_Productos_UnidadMedida" FromRole="Producto" ToRole="UnidadMedida" />
+  </EntityType>
+  <Association Name="FK_Productos_Almacen">
+    <End Type="POSModel.Almacen" Role="Almacen" Multiplicity="0..1" />
+    <End Type="POSModel.Producto" Role="Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Almacen">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IDAlmacen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Productos_Categoria">
+    <End Type="POSModel.Categoria" Role="Categoria" Multiplicity="0..1" />
+    <End Type="POSModel.Producto" Role="Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="IDCategoria" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

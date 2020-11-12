@@ -17,7 +17,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Categoria" Type="nvarchar" MaxLength="50" />
+          <Property Name="Categoria" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Contacto">
           <Key>
@@ -62,6 +62,19 @@
           <Property Name="Precio" Type="numeric" Precision="18" Scale="2" />
           <Property Name="Cantida" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
+        <EntityType Name="Materiales">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="DESCRIPCION" Type="nvarchar(max)" />
+          <Property Name="UND" Type="nvarchar(max)" />
+          <Property Name="PU_ITBIS" Type="nvarchar" MaxLength="50" />
+          <Property Name="PU_SIN_ITBIS" Type="nvarchar" MaxLength="50" />
+          <Property Name="RENDIMIENTOS_OBS" Type="nvarchar" MaxLength="50" />
+          <Property Name="SUPLIDOR_RECOMENDADO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Padre" Type="int" />
+        </EntityType>
         <EntityType Name="MetodoPago">
           <Key>
             <PropertyRef Name="Id" />
@@ -77,11 +90,12 @@
           <Property Name="IDAlmacen" Type="int" />
           <Property Name="IDCategoria" Type="int" />
           <Property Name="IDUnidad" Type="int" />
-          <Property Name="Producto" Type="nvarchar" MaxLength="50" />
+          <Property Name="Producto" Type="nvarchar(max)" />
           <Property Name="Precio_Compra" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Precio_Venta" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Stock" Type="int" />
           <Property Name="CodigoBarra" Type="nvarchar(max)" />
+          <Property Name="Precio_SinITBIS" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Recibo">
           <Key>
@@ -221,6 +235,7 @@
           <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FacturaDetalle" EntityType="Self.FacturaDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materiales" EntityType="Self.Materiales" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MetodoPago" EntityType="Self.MetodoPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recibo" EntityType="Self.Recibo" Schema="dbo" store:Type="Tables" />
@@ -266,24 +281,14 @@
       <Schema Namespace="POSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="POSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Almacens" EntityType="POSModel.Almacen" />
-          <EntitySet Name="Categorias" EntityType="POSModel.Categoria" />
           <EntitySet Name="Contactoes" EntityType="POSModel.Contacto" />
           <EntitySet Name="Facturas" EntityType="POSModel.Factura" />
           <EntitySet Name="FacturaDetalles" EntityType="POSModel.FacturaDetalle" />
           <EntitySet Name="MetodoPagoes" EntityType="POSModel.MetodoPago" />
-          <EntitySet Name="Productos" EntityType="POSModel.Producto" />
           <EntitySet Name="Reciboes" EntityType="POSModel.Recibo" />
           <EntitySet Name="sysdiagrams" EntityType="POSModel.sysdiagram" />
           <EntitySet Name="TipoFacturas" EntityType="POSModel.TipoFactura" />
           <EntitySet Name="UnidadMedidas" EntityType="POSModel.UnidadMedida" />
-          <AssociationSet Name="FK_Productos_Almacen" Association="POSModel.FK_Productos_Almacen">
-            <End Role="Almacen" EntitySet="Almacens" />
-            <End Role="Producto" EntitySet="Productos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Productos_Categoria" Association="POSModel.FK_Productos_Categoria">
-            <End Role="Categoria" EntitySet="Categorias" />
-            <End Role="Producto" EntitySet="Productos" />
-          </AssociationSet>
           <AssociationSet Name="FK_Factura_Contacto" Association="POSModel.FK_Factura_Contacto">
             <End Role="Contacto" EntitySet="Contactoes" />
             <End Role="Factura" EntitySet="Facturas" />
@@ -304,11 +309,22 @@
             <End Role="MetodoPago" EntitySet="MetodoPagoes" />
             <End Role="Recibo" EntitySet="Reciboes" />
           </AssociationSet>
+          <EntitySet Name="Categorias" EntityType="POSModel.Categoria" />
+          <EntitySet Name="Materiales" EntityType="POSModel.Materiale" />
+          <EntitySet Name="Productos" EntityType="POSModel.Producto" />
+          <AssociationSet Name="FK_Productos_Almacen" Association="POSModel.FK_Productos_Almacen">
+            <End Role="Almacen" EntitySet="Almacens" />
+            <End Role="Producto" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Productos_Categoria" Association="POSModel.FK_Productos_Categoria">
+            <End Role="Categoria" EntitySet="Categorias" />
+            <End Role="Producto" EntitySet="Productos" />
+          </AssociationSet>
           <AssociationSet Name="FK_Productos_UnidadMedida" Association="POSModel.FK_Productos_UnidadMedida">
             <End Role="UnidadMedida" EntitySet="UnidadMedidas" />
             <End Role="Producto" EntitySet="Productos" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Almacen">
           <Key>
             <PropertyRef Name="Id" />
@@ -316,14 +332,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Almacen1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Productos" Relationship="POSModel.FK_Productos_Almacen" FromRole="Almacen" ToRole="Producto" />
-        </EntityType>
-        <EntityType Name="Categoria">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Categoria1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Productos" Relationship="POSModel.FK_Productos_Categoria" FromRole="Categoria" ToRole="Producto" />
         </EntityType>
         <EntityType Name="Contacto">
           <Key>
@@ -382,23 +390,6 @@
           <Property Name="MetodoPago1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Reciboes" Relationship="POSModel.FK_Recibo_MetodoPago" FromRole="MetodoPago" ToRole="Recibo" />
         </EntityType>
-        <EntityType Name="Producto">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDAlmacen" Type="Int32" />
-          <Property Name="IDCategoria" Type="Int32" />
-          <Property Name="IDUnidad" Type="Int32" />
-          <Property Name="Producto1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Precio_Compra" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Precio_Venta" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Stock" Type="Int32" />
-          <Property Name="CodigoBarra" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Almacen" Relationship="POSModel.FK_Productos_Almacen" FromRole="Producto" ToRole="Almacen" />
-          <NavigationProperty Name="Categoria" Relationship="POSModel.FK_Productos_Categoria" FromRole="Producto" ToRole="Categoria" />
-          <NavigationProperty Name="UnidadMedida" Relationship="POSModel.FK_Productos_UnidadMedida" FromRole="Producto" ToRole="UnidadMedida" />
-        </EntityType>
         <EntityType Name="Recibo">
           <Key>
             <PropertyRef Name="Id" />
@@ -439,30 +430,6 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Productos" Relationship="POSModel.FK_Productos_UnidadMedida" FromRole="UnidadMedida" ToRole="Producto" />
         </EntityType>
-        <Association Name="FK_Productos_Almacen">
-          <End Type="POSModel.Almacen" Role="Almacen" Multiplicity="0..1" />
-          <End Type="POSModel.Producto" Role="Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Almacen">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="IDAlmacen" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Productos_Categoria">
-          <End Type="POSModel.Categoria" Role="Categoria" Multiplicity="0..1" />
-          <End Type="POSModel.Producto" Role="Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categoria">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="IDCategoria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Factura_Contacto">
           <End Type="POSModel.Contacto" Role="Contacto" Multiplicity="0..1" />
           <End Type="POSModel.Factura" Role="Factura" Multiplicity="*" />
@@ -523,6 +490,69 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Categoria1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Productos" Relationship="POSModel.FK_Productos_Categoria" FromRole="Categoria" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Materiale">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UND" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PU_ITBIS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PU_SIN_ITBIS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RENDIMIENTOS_OBS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SUPLIDOR_RECOMENDADO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Padre" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDAlmacen" Type="Int32" />
+          <Property Name="IDCategoria" Type="Int32" />
+          <Property Name="IDUnidad" Type="Int32" />
+          <Property Name="Producto1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Precio_Compra" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Precio_Venta" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Stock" Type="Int32" />
+          <Property Name="CodigoBarra" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Precio_SinITBIS" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Almacen" Relationship="POSModel.FK_Productos_Almacen" FromRole="Producto" ToRole="Almacen" />
+          <NavigationProperty Name="Categoria" Relationship="POSModel.FK_Productos_Categoria" FromRole="Producto" ToRole="Categoria" />
+          <NavigationProperty Name="UnidadMedida" Relationship="POSModel.FK_Productos_UnidadMedida" FromRole="Producto" ToRole="UnidadMedida" />
+        </EntityType>
+        <Association Name="FK_Productos_Almacen">
+          <End Type="POSModel.Almacen" Role="Almacen" Multiplicity="0..1" />
+          <End Type="POSModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Almacen">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IDAlmacen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Productos_Categoria">
+          <End Type="POSModel.Categoria" Role="Categoria" Multiplicity="0..1" />
+          <End Type="POSModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Productos_UnidadMedida">
           <End Type="POSModel.UnidadMedida" Role="UnidadMedida" Multiplicity="0..1" />
           <End Type="POSModel.Producto" Role="Producto" Multiplicity="*" />
@@ -545,14 +575,6 @@
             <EntityTypeMapping TypeName="POSModel.Almacen">
               <MappingFragment StoreEntitySet="Almacen">
                 <ScalarProperty Name="Almacen1" ColumnName="Almacen" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Categorias">
-            <EntityTypeMapping TypeName="POSModel.Categoria">
-              <MappingFragment StoreEntitySet="Categoria">
-                <ScalarProperty Name="Categoria1" ColumnName="Categoria" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -611,21 +633,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Productos">
-            <EntityTypeMapping TypeName="POSModel.Producto">
-              <MappingFragment StoreEntitySet="Productos">
-                <ScalarProperty Name="CodigoBarra" ColumnName="CodigoBarra" />
-                <ScalarProperty Name="Stock" ColumnName="Stock" />
-                <ScalarProperty Name="Precio_Venta" ColumnName="Precio_Venta" />
-                <ScalarProperty Name="Precio_Compra" ColumnName="Precio_Compra" />
-                <ScalarProperty Name="Producto1" ColumnName="Producto" />
-                <ScalarProperty Name="IDUnidad" ColumnName="IDUnidad" />
-                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
-                <ScalarProperty Name="IDAlmacen" ColumnName="IDAlmacen" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Reciboes">
             <EntityTypeMapping TypeName="POSModel.Recibo">
               <MappingFragment StoreEntitySet="Recibo">
@@ -662,6 +669,44 @@
             <EntityTypeMapping TypeName="POSModel.UnidadMedida">
               <MappingFragment StoreEntitySet="UnidadMedida">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="POSModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="Categoria1" ColumnName="Categoria" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materiales">
+            <EntityTypeMapping TypeName="POSModel.Materiale">
+              <MappingFragment StoreEntitySet="Materiales">
+                <ScalarProperty Name="Padre" ColumnName="Padre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SUPLIDOR_RECOMENDADO" ColumnName="SUPLIDOR_RECOMENDADO" />
+                <ScalarProperty Name="RENDIMIENTOS_OBS" ColumnName="RENDIMIENTOS_OBS" />
+                <ScalarProperty Name="PU_SIN_ITBIS" ColumnName="PU_SIN_ITBIS" />
+                <ScalarProperty Name="PU_ITBIS" ColumnName="PU_ITBIS" />
+                <ScalarProperty Name="UND" ColumnName="UND" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="POSModel.Producto">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="Precio_SinITBIS" ColumnName="Precio_SinITBIS" />
+                <ScalarProperty Name="CodigoBarra" ColumnName="CodigoBarra" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Precio_Venta" ColumnName="Precio_Venta" />
+                <ScalarProperty Name="Precio_Compra" ColumnName="Precio_Compra" />
+                <ScalarProperty Name="Producto1" ColumnName="Producto" />
+                <ScalarProperty Name="IDUnidad" ColumnName="IDUnidad" />
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="IDAlmacen" ColumnName="IDAlmacen" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

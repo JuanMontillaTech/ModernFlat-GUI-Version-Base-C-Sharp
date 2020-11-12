@@ -9,14 +9,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Categorias">
-      <EntityTypeMapping TypeName="POSModel.Categoria">
-        <MappingFragment StoreEntitySet="Categoria">
-          <ScalarProperty Name="Categoria1" ColumnName="Categoria" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Contactoes">
       <EntityTypeMapping TypeName="POSModel.Contacto">
         <MappingFragment StoreEntitySet="Contacto">
@@ -71,21 +63,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Productos">
-      <EntityTypeMapping TypeName="POSModel.Producto">
-        <MappingFragment StoreEntitySet="Productos">
-          <ScalarProperty Name="CodigoBarra" ColumnName="CodigoBarra" />
-          <ScalarProperty Name="Stock" ColumnName="Stock" />
-          <ScalarProperty Name="Precio_Venta" ColumnName="Precio_Venta" />
-          <ScalarProperty Name="Precio_Compra" ColumnName="Precio_Compra" />
-          <ScalarProperty Name="Producto1" ColumnName="Producto" />
-          <ScalarProperty Name="IDUnidad" ColumnName="IDUnidad" />
-          <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
-          <ScalarProperty Name="IDAlmacen" ColumnName="IDAlmacen" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Reciboes">
       <EntityTypeMapping TypeName="POSModel.Recibo">
         <MappingFragment StoreEntitySet="Recibo">
@@ -122,6 +99,44 @@
       <EntityTypeMapping TypeName="POSModel.UnidadMedida">
         <MappingFragment StoreEntitySet="UnidadMedida">
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categorias">
+      <EntityTypeMapping TypeName="POSModel.Categoria">
+        <MappingFragment StoreEntitySet="Categoria">
+          <ScalarProperty Name="Categoria1" ColumnName="Categoria" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Materiales">
+      <EntityTypeMapping TypeName="POSModel.Materiale">
+        <MappingFragment StoreEntitySet="Materiales">
+          <ScalarProperty Name="Padre" ColumnName="Padre" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SUPLIDOR_RECOMENDADO" ColumnName="SUPLIDOR_RECOMENDADO" />
+          <ScalarProperty Name="RENDIMIENTOS_OBS" ColumnName="RENDIMIENTOS_OBS" />
+          <ScalarProperty Name="PU_SIN_ITBIS" ColumnName="PU_SIN_ITBIS" />
+          <ScalarProperty Name="PU_ITBIS" ColumnName="PU_ITBIS" />
+          <ScalarProperty Name="UND" ColumnName="UND" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Productos">
+      <EntityTypeMapping TypeName="POSModel.Producto">
+        <MappingFragment StoreEntitySet="Productos">
+          <ScalarProperty Name="Precio_SinITBIS" ColumnName="Precio_SinITBIS" />
+          <ScalarProperty Name="CodigoBarra" ColumnName="CodigoBarra" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="Precio_Venta" ColumnName="Precio_Venta" />
+          <ScalarProperty Name="Precio_Compra" ColumnName="Precio_Compra" />
+          <ScalarProperty Name="Producto1" ColumnName="Producto" />
+          <ScalarProperty Name="IDUnidad" ColumnName="IDUnidad" />
+          <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+          <ScalarProperty Name="IDAlmacen" ColumnName="IDAlmacen" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

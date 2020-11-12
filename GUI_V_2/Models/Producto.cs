@@ -23,6 +23,7 @@ namespace GUI_V_2.Models
         public Nullable<decimal> Precio_Venta { get; set; }
         public Nullable<int> Stock { get; set; }
         public string CodigoBarra { get; set; }
+        public Nullable<decimal> Precio_SinITBIS { get; set; }
     
         public virtual Almacen Almacen { get; set; }
         public virtual Categoria Categoria { get; set; }

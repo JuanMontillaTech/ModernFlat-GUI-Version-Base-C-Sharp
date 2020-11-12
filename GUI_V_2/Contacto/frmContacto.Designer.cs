@@ -126,7 +126,7 @@
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(240, 43);
             this.btnEditar.TabIndex = 24;
-            this.btnEditar.Text = "Editar";
+            this.btnEditar.Text = "Editar(F2)";
             this.btnEditar.UseVisualStyleBackColor = false;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
@@ -145,7 +145,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(240, 43);
             this.button1.TabIndex = 23;
-            this.button1.Text = "Nuevo";
+            this.button1.Text = "Nuevo (F1)";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -212,9 +212,12 @@
             this.ClientSize = new System.Drawing.Size(1165, 620);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.KeyPreview = true;
             this.Name = "frmContacto";
             this.Text = "Cliente";
             this.Load += new System.EventHandler(this.frmContacto_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmContacto_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmContacto_KeyUp);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

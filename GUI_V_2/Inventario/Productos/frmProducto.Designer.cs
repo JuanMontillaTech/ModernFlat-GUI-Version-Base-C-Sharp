@@ -149,7 +149,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(240, 43);
             this.button4.TabIndex = 24;
-            this.button4.Text = "Editar";
+            this.button4.Text = "Editar(F2)";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -168,7 +168,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(240, 43);
             this.button5.TabIndex = 23;
-            this.button5.Text = "Nuevo";
+            this.button5.Text = "Nuevo (F1)";
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -276,8 +276,11 @@
             this.ClientSize = new System.Drawing.Size(1117, 748);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.KeyPreview = true;
             this.Name = "frmProducto";
             this.Text = "Productos";
+            this.Load += new System.EventHandler(this.frmProducto_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmProducto_KeyUp);
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

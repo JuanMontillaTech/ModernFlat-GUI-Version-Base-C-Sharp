@@ -87,13 +87,23 @@ namespace GUI_V_2.Inventario.Productos
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            frmProductoCRED frmProductoCRED = new frmProductoCRED();
-            frmProductoCRED.ShowDialog();
-            GetGRVData();
+            NewRows();
 
         }
 
+        private void NewRows()
+        {
+            frmProductoCRED frmProductoCRED = new frmProductoCRED();
+            frmProductoCRED.ShowDialog();
+            GetGRVData();
+        }
+
         private void button4_Click(object sender, EventArgs e)
+        {
+            EditRow();
+        }
+
+        private void EditRow()
         {
             int? Id = GetIdRow();
             if (Id != null)
@@ -219,6 +229,33 @@ namespace GUI_V_2.Inventario.Productos
                 System.Diagnostics.Process.Start(productoFile);
 
 
+        }
+
+        private void frmProducto_KeyUp(object sender, KeyEventArgs e)
+        {
+            
+                switch (e.KeyCode)
+                {
+                    case Keys.Escape:
+                        this.Close();
+                        break;
+                    case Keys.F1:
+
+                    NewRows();
+
+                    break;
+                    case Keys.F2:
+                    EditRow();
+                    break;
+                    default:
+                        break;
+                }
+             
+        }
+
+        private void frmProducto_Load(object sender, EventArgs e)
+        {
+            txtFiltroCliente.Focus();
         }
     }
 }

@@ -68,3 +68,9 @@ C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V
 C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\bin\Debug\Spire.XLS.xml
 C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\GUI_V_2.Facturacion.frmRecibo.resources
 C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\GUI_V_2.Facturacion.frmcxc.resources
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\bin\Debug\es-EC\GUI_V_2.resources.dll
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\GUI_V_2.InicioResumen.es-EC.resources
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\es-EC\GUI_V_2.resources.dll
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\bin\Debug\es-DO\GUI_V_2.resources.dll
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\GUI_V_2.InicioResumen.es-DO.resources
+C:\Users\JuanMontilla\Documents\GitHub\ModernFlat-GUI-Version-Base-C-Sharp\GUI_V_2\obj\Debug\es-DO\GUI_V_2.resources.dll

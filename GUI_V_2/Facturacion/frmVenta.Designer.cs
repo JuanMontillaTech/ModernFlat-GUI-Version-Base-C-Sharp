@@ -36,12 +36,10 @@
             this.txtIDCliente = new System.Windows.Forms.TextBox();
             this.txtNombreCliente = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtFecha = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.txtMoneda = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.pnlFoot = new System.Windows.Forms.Panel();
-            this.btnPrint = new System.Windows.Forms.Button();
+            this.btnFacturar = new System.Windows.Forms.Button();
             this.txtTotal = new System.Windows.Forms.Label();
             this.txtSubtotal = new System.Windows.Forms.Label();
             this.btnPagar = new System.Windows.Forms.Button();
@@ -65,7 +63,6 @@
             this.ptotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PrecioCompra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.btnFacturar = new System.Windows.Forms.Button();
             this.pnlFoot.SuspendLayout();
             this.pnlHead.SuspendLayout();
             this.pnlArticulo.SuspendLayout();
@@ -153,24 +150,6 @@
             this.label6.TabIndex = 11;
             this.label6.Text = "Nombre de Cliente";
             // 
-            // txtFecha
-            // 
-            this.txtFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFecha.Location = new System.Drawing.Point(533, 21);
-            this.txtFecha.Name = "txtFecha";
-            this.txtFecha.Size = new System.Drawing.Size(261, 26);
-            this.txtFecha.TabIndex = 14;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(458, 26);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 20);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Fecha";
-            // 
             // txtMoneda
             // 
             this.txtMoneda.Enabled = false;
@@ -193,7 +172,6 @@
             // pnlFoot
             // 
             this.pnlFoot.Controls.Add(this.btnFacturar);
-            this.pnlFoot.Controls.Add(this.btnPrint);
             this.pnlFoot.Controls.Add(this.txtTotal);
             this.pnlFoot.Controls.Add(this.txtSubtotal);
             this.pnlFoot.Controls.Add(this.btnPagar);
@@ -207,15 +185,15 @@
             this.pnlFoot.Size = new System.Drawing.Size(849, 183);
             this.pnlFoot.TabIndex = 17;
             // 
-            // btnPrint
+            // btnFacturar
             // 
-            this.btnPrint.Location = new System.Drawing.Point(300, 128);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(75, 23);
-            this.btnPrint.TabIndex = 25;
-            this.btnPrint.Text = "Imprimit";
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            this.btnFacturar.Location = new System.Drawing.Point(7, 6);
+            this.btnFacturar.Name = "btnFacturar";
+            this.btnFacturar.Size = new System.Drawing.Size(231, 38);
+            this.btnFacturar.TabIndex = 26;
+            this.btnFacturar.Text = "Facturar (Cuenta por Cobrar)";
+            this.btnFacturar.UseVisualStyleBackColor = true;
+            this.btnFacturar.Click += new System.EventHandler(this.btnFacturar_Click);
             // 
             // txtTotal
             // 
@@ -300,9 +278,7 @@
             this.pnlHead.Controls.Add(this.txtnudoc);
             this.pnlHead.Controls.Add(this.label8);
             this.pnlHead.Controls.Add(this.label4);
-            this.pnlHead.Controls.Add(this.txtFecha);
             this.pnlHead.Controls.Add(this.label5);
-            this.pnlHead.Controls.Add(this.label7);
             this.pnlHead.Controls.Add(this.txtIDCliente);
             this.pnlHead.Controls.Add(this.txtNombreCliente);
             this.pnlHead.Controls.Add(this.label6);
@@ -461,16 +437,6 @@
             this.PrecioCompra.Visible = false;
             this.PrecioCompra.Width = 125;
             // 
-            // btnFacturar
-            // 
-            this.btnFacturar.Location = new System.Drawing.Point(7, 6);
-            this.btnFacturar.Name = "btnFacturar";
-            this.btnFacturar.Size = new System.Drawing.Size(231, 38);
-            this.btnFacturar.TabIndex = 26;
-            this.btnFacturar.Text = "Facturar (Cuenta por Cobrar)";
-            this.btnFacturar.UseVisualStyleBackColor = true;
-            this.btnFacturar.Click += new System.EventHandler(this.btnFacturar_Click);
-            // 
             // frmVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -481,8 +447,12 @@
             this.Controls.Add(this.pnlHead);
             this.Controls.Add(this.pnlFoot);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.Name = "frmVenta";
             this.Text = "frmVenta";
+            this.Load += new System.EventHandler(this.frmVenta_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmVenta_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmVenta_KeyUp);
             this.pnlFoot.ResumeLayout(false);
             this.pnlFoot.PerformLayout();
             this.pnlHead.ResumeLayout(false);
@@ -505,8 +475,6 @@
         private System.Windows.Forms.TextBox txtIDCliente;
         private System.Windows.Forms.TextBox txtNombreCliente;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtFecha;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtMoneda;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel pnlFoot;
@@ -532,7 +500,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ptotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn PrecioCompra;
         private System.Windows.Forms.Button btnClientes;
-        private System.Windows.Forms.Button btnPrint;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.Button btnFacturar;
     }

@@ -28,37 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCategoria));
             this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pOSDataSet = new GUI_V_2.POSDataSet();
-            this.categoriaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.categoriaTableAdapter = new GUI_V_2.POSDataSetTableAdapters.CategoriaTableAdapter();
-            this.tableAdapterManager = new GUI_V_2.POSDataSetTableAdapters.TableAdapterManager();
-            this.categoriaBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.categoriaBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
-            this.categoriaDataGridView = new System.Windows.Forms.DataGridView();
             this.btnEditar = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.pOSDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingNavigator)).BeginInit();
-            this.categoriaBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.categoriaDataGridView)).BeginInit();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.grvData = new System.Windows.Forms.DataGridView();
+            this.Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtFiltro = new System.Windows.Forms.TextBox();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grvData)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -71,7 +54,7 @@
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(9, 13);
+            this.button1.Location = new System.Drawing.Point(4, 13);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(240, 43);
@@ -79,193 +62,6 @@
             this.button1.Text = "Nuevo";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(4, 401);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(196, 29);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Lista Categorias";
-            // 
-            // pOSDataSet
-            // 
-            this.pOSDataSet.DataSetName = "POSDataSet";
-            this.pOSDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // categoriaBindingSource
-            // 
-            this.categoriaBindingSource.DataMember = "Categoria";
-            this.categoriaBindingSource.DataSource = this.pOSDataSet;
-            // 
-            // categoriaTableAdapter
-            // 
-            this.categoriaTableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.AlmacenTableAdapter = null;
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.CategoriaTableAdapter = this.categoriaTableAdapter;
-            this.tableAdapterManager.ContactoTableAdapter = null;
-            this.tableAdapterManager.FacturaDetalleTableAdapter = null;
-            this.tableAdapterManager.FacturaTableAdapter = null;
-            this.tableAdapterManager.ProductosTableAdapter = null;
-            this.tableAdapterManager.ReciboTableAdapter = null;
-            this.tableAdapterManager.TipoFacturaTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = GUI_V_2.POSDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            // 
-            // categoriaBindingNavigator
-            // 
-            this.categoriaBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
-            this.categoriaBindingNavigator.BindingSource = this.categoriaBindingSource;
-            this.categoriaBindingNavigator.CountItem = this.bindingNavigatorCountItem;
-            this.categoriaBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
-            this.categoriaBindingNavigator.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.categoriaBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bindingNavigatorCountItem,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2,
-            this.bindingNavigatorAddNewItem,
-            this.bindingNavigatorDeleteItem,
-            this.categoriaBindingNavigatorSaveItem});
-            this.categoriaBindingNavigator.Location = new System.Drawing.Point(0, 0);
-            this.categoriaBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.categoriaBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.categoriaBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.categoriaBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.categoriaBindingNavigator.Name = "categoriaBindingNavigator";
-            this.categoriaBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.categoriaBindingNavigator.Size = new System.Drawing.Size(1072, 27);
-            this.categoriaBindingNavigator.TabIndex = 12;
-            this.categoriaBindingNavigator.Text = "bindingNavigator1";
-            this.categoriaBindingNavigator.Visible = false;
-            // 
-            // bindingNavigatorAddNewItem
-            // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 24);
-            this.bindingNavigatorCountItem.Text = "of {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
-            // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 27);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "Position";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 27);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 27);
-            // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorMoveNextItem.Text = "Move next";
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 24);
-            this.bindingNavigatorMoveLastItem.Text = "Move last";
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 27);
-            // 
-            // categoriaBindingNavigatorSaveItem
-            // 
-            this.categoriaBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.categoriaBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("categoriaBindingNavigatorSaveItem.Image")));
-            this.categoriaBindingNavigatorSaveItem.Name = "categoriaBindingNavigatorSaveItem";
-            this.categoriaBindingNavigatorSaveItem.Size = new System.Drawing.Size(29, 24);
-            this.categoriaBindingNavigatorSaveItem.Text = "Save Data";
-            this.categoriaBindingNavigatorSaveItem.Click += new System.EventHandler(this.categoriaBindingNavigatorSaveItem_Click);
-            // 
-            // categoriaDataGridView
-            // 
-            this.categoriaDataGridView.AllowUserToAddRows = false;
-            this.categoriaDataGridView.AllowUserToDeleteRows = false;
-            this.categoriaDataGridView.AutoGenerateColumns = false;
-            this.categoriaDataGridView.ColumnHeadersHeight = 29;
-            this.categoriaDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2});
-            this.categoriaDataGridView.DataSource = this.categoriaBindingSource;
-            this.categoriaDataGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.categoriaDataGridView.GridColor = System.Drawing.SystemColors.ActiveCaption;
-            this.categoriaDataGridView.Location = new System.Drawing.Point(0, 96);
-            this.categoriaDataGridView.MultiSelect = false;
-            this.categoriaDataGridView.Name = "categoriaDataGridView";
-            this.categoriaDataGridView.ReadOnly = true;
-            this.categoriaDataGridView.RowHeadersWidth = 51;
-            this.categoriaDataGridView.RowTemplate.Height = 24;
-            this.categoriaDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.categoriaDataGridView.Size = new System.Drawing.Size(968, 369);
-            this.categoriaDataGridView.TabIndex = 15;
             // 
             // btnEditar
             // 
@@ -277,7 +73,7 @@
             this.btnEditar.ForeColor = System.Drawing.Color.White;
             this.btnEditar.Image = ((System.Drawing.Image)(resources.GetObject("btnEditar.Image")));
             this.btnEditar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditar.Location = new System.Drawing.Point(269, 13);
+            this.btnEditar.Location = new System.Drawing.Point(264, 13);
             this.btnEditar.Margin = new System.Windows.Forms.Padding(4);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(240, 43);
@@ -296,7 +92,7 @@
             this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(530, 13);
+            this.button2.Location = new System.Drawing.Point(525, 13);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(201, 43);
@@ -305,23 +101,75 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // dataGridViewTextBoxColumn1
+            // panel1
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Código";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 125;
+            this.panel1.Controls.Add(this.txtFiltro);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btnEditar);
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(968, 116);
+            this.panel1.TabIndex = 20;
             // 
-            // dataGridViewTextBoxColumn2
+            // panel2
             // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Categoria";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Categoría";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.panel2.Controls.Add(this.grvData);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 116);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(968, 349);
+            this.panel2.TabIndex = 21;
+            // 
+            // grvData
+            // 
+            this.grvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Codigo,
+            this.Categoria});
+            this.grvData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grvData.Location = new System.Drawing.Point(0, 0);
+            this.grvData.Name = "grvData";
+            this.grvData.RowHeadersWidth = 51;
+            this.grvData.RowTemplate.Height = 24;
+            this.grvData.Size = new System.Drawing.Size(968, 349);
+            this.grvData.TabIndex = 0;
+            // 
+            // Codigo
+            // 
+            this.Codigo.DataPropertyName = "id";
+            this.Codigo.HeaderText = "Código";
+            this.Codigo.MinimumWidth = 6;
+            this.Codigo.Name = "Codigo";
+            this.Codigo.Width = 125;
+            // 
+            // Categoria
+            // 
+            this.Categoria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Categoria.DataPropertyName = "categoria";
+            this.Categoria.HeaderText = "Categoría";
+            this.Categoria.MinimumWidth = 6;
+            this.Categoria.Name = "Categoria";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(39, 17);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Filtro";
+            // 
+            // txtFiltro
+            // 
+            this.txtFiltro.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txtFiltro.Location = new System.Drawing.Point(0, 94);
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.Size = new System.Drawing.Size(968, 22);
+            this.txtFiltro.TabIndex = 21;
+            this.txtFiltro.TextChanged += new System.EventHandler(this.txtFiltro_TextChanged);
             // 
             // frmCategoria
             // 
@@ -329,50 +177,29 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(968, 465);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.btnEditar);
-            this.Controls.Add(this.categoriaDataGridView);
-            this.Controls.Add(this.categoriaBindingNavigator);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Name = "frmCategoria";
             this.Text = "Mantenimiendo de Categoría";
             this.Load += new System.EventHandler(this.frmCategoria_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pOSDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.categoriaBindingNavigator)).EndInit();
-            this.categoriaBindingNavigator.ResumeLayout(false);
-            this.categoriaBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.categoriaDataGridView)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grvData)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
-        private POSDataSet pOSDataSet;
-        private System.Windows.Forms.BindingSource categoriaBindingSource;
-        private POSDataSetTableAdapters.CategoriaTableAdapter categoriaTableAdapter;
-        private POSDataSetTableAdapters.TableAdapterManager tableAdapterManager;
-        private System.Windows.Forms.BindingNavigator categoriaBindingNavigator;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
-        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
-        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.ToolStripButton categoriaBindingNavigatorSaveItem;
-        private System.Windows.Forms.DataGridView categoriaDataGridView;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.DataGridView grvData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Categoria;
+        private System.Windows.Forms.TextBox txtFiltro;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -6,23 +6,24 @@
     <edmx:Diagrams>
       <Diagram DiagramId="8607a9d33b8f435da998d8d878d8a6b6" Name="Diagram1">
         <EntityTypeShape EntityType="POSModel.Almacen" Width="1.5" PointX="7.75" PointY="7.375" />
-        <EntityTypeShape EntityType="POSModel.Categoria" Width="1.5" PointX="7.75" PointY="5" />
         <EntityTypeShape EntityType="POSModel.Contacto" Width="1.5" PointX="0.75" PointY="7.125" />
         <EntityTypeShape EntityType="POSModel.Factura" Width="1.5" PointX="3" PointY="2" />
         <EntityTypeShape EntityType="POSModel.FacturaDetalle" Width="1.5" PointX="5.25" PointY="5.75" />
         <EntityTypeShape EntityType="POSModel.MetodoPago" Width="1.5" PointX="3" PointY="8" />
-        <EntityTypeShape EntityType="POSModel.Producto" Width="1.5" PointX="10" PointY="1" />
         <EntityTypeShape EntityType="POSModel.Recibo" Width="1.5" PointX="5.25" PointY="2.625" />
         <EntityTypeShape EntityType="POSModel.sysdiagram" Width="1.5" PointX="9.75" PointY="5.75" />
         <EntityTypeShape EntityType="POSModel.TipoFactura" Width="1.5" PointX="0.75" PointY="2.875" />
         <EntityTypeShape EntityType="POSModel.UnidadMedida" Width="1.5" PointX="7.75" PointY="1.875" />
-        <AssociationConnector Association="POSModel.FK_Productos_Almacen" />
-        <AssociationConnector Association="POSModel.FK_Productos_Categoria" />
         <AssociationConnector Association="POSModel.FK_Factura_Contacto" />
         <AssociationConnector Association="POSModel.FK_Factura_TipoFacturas" />
         <AssociationConnector Association="POSModel.FK_FacturaDetalle_Factura" />
         <AssociationConnector Association="POSModel.FK_Recibo_Factura" />
         <AssociationConnector Association="POSModel.FK_Recibo_MetodoPago" />
+        <EntityTypeShape EntityType="POSModel.Categoria" Width="1.5" PointX="5.375" PointY="9.875" />
+        <EntityTypeShape EntityType="POSModel.Materiale" Width="1.5" PointX="7.375" PointY="9.75" />
+        <EntityTypeShape EntityType="POSModel.Producto" Width="1.5" PointX="12" PointY="4.875" />
+        <AssociationConnector Association="POSModel.FK_Productos_Almacen" />
+        <AssociationConnector Association="POSModel.FK_Productos_Categoria" />
         <AssociationConnector Association="POSModel.FK_Productos_UnidadMedida" />
       </Diagram>
     </edmx:Diagrams>
