@@ -390,6 +390,12 @@ namespace GUI_V_2.Facturacion
 
         private void btnFacturar_Click(object sender, EventArgs e)
         {
+            CrearFactura();
+
+        }
+
+        private void CrearFactura()
+        {
             if (!string.IsNullOrEmpty(txtIDCliente.Text))
             {
                 if (dgvData.Rows.Count >= 1)
@@ -407,9 +413,32 @@ namespace GUI_V_2.Facturacion
             {
                 MessageBox.Show("Seleccione un clinete");
             }
-           
-
         }
+        private void CrearFacturaRecibo()
+        {
+            if (!string.IsNullOrEmpty(txtIDCliente.Text))
+            {
+                if (dgvData.Rows.Count >= 1)
+                {
+                    var Factura = CrearFactura(1);
+                    frmRecibo frmRecibo = new frmRecibo(Factura);
+                    frmRecibo.ShowDialog();
+                    var recb = frmRecibo.recibo;
+                    Settoprint();
+                    ClearForm();
+                }
+                else
+                {
+                    MessageBox.Show("La factura no tiene detalle");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un clinete");
+            }
+        }
+
+
 
         private Factura CrearFactura(int Estado)
         {
@@ -510,8 +539,9 @@ namespace GUI_V_2.Facturacion
                 }
                 e.Graphics.DrawString(line, font, Brushes.Black, new RectangleF(0, y += 5, width, 20)); 
                 e.Graphics.DrawString("DESCUENTO: " + fac.Total_Descuento.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
+                
                 e.Graphics.DrawString("TOTAL A PAGAR " + fac.Total_Facturado.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
-
+                e.Graphics.DrawString("TOTAL PAGADO " + fac.Total_Facturado.ToString(), font, Brushes.Black, new RectangleF(0, y += 20, width, 20));
 
             }
 
@@ -562,6 +592,11 @@ namespace GUI_V_2.Facturacion
                         break;
                 }
              
+        }
+
+        private void btnPagar_Click(object sender, EventArgs e)
+        {
+            CrearFacturaRecibo();
         }
     }
 

@@ -225,6 +225,7 @@
             this.btnPagar.TabIndex = 20;
             this.btnPagar.Text = "Facturar y Pagar";
             this.btnPagar.UseVisualStyleBackColor = true;
+            this.btnPagar.Click += new System.EventHandler(this.btnPagar_Click);
             // 
             // label10
             // 
